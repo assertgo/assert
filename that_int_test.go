@@ -21,13 +21,13 @@ func TestThatIntIsZeroFails(t *testing.T) {
 func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
 	assert := func() {
-		if buffer.String() != "Expected <0>, but was <1>.\n" {
-			t.Fail()
+		if buffer.String() != "Expected <0>, but was <6>.\n" {
+			t.Error("Expected <Expected <0>, but was <6>.\n>, but was <" + buffer.String() + ">.")
 		}
 	}
 	recoverAndRestore := mockWriter(buffer, assert)
 	defer recoverAndRestore()
-	ThatInt(1).IsZero()
+	ThatInt(6).IsZero()
 }
 
 func mockWriter(writerDouble io.Writer, asserts ...func()) func() {

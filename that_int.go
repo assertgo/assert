@@ -12,7 +12,7 @@ type ThatInt int
 
 func (thatInt ThatInt) IsZero() {
 	if thatInt != 0 {
-		fmt.Fprintln(writer, "Expected <0>, but was <1>.")
+		fmt.Fprintf(writer, "Expected <0>, but was <%d>.\n", thatInt)
 		panic("that int should be zero")
 	}
 }
