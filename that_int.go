@@ -4,19 +4,27 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"testing"
 )
 
 var writer io.Writer = os.Stdout
 
-type ThatInt int
-
-func (actual ThatInt) IsZero() ThatInt {
-	return actual.IsEqualTo(0)
+func ThatInt(t *testing.T, actual int) *IntAssert {
+	return &IntAssert{t, actual}
 }
 
-func (actual ThatInt) IsEqualTo(expected int) ThatInt {
-	if int(actual) != expected {
-		fmt.Fprintf(writer, "Expected <%d>, but was <%d>.\n", expected, actual)
+type IntAssert struct {
+	t      *testing.T
+	actual int
+}
+
+func (assert *IntAssert) IsZero() *IntAssert {
+	return assert.IsEqualTo(0)
+}
+
+func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
+	if assert.actual != expected {
+		fmt.Fprintf(writer, "Expected <%d>, but was <%d>.\n", expected, assert.actual)
 	}
-	return actual
+	return assert
 }
