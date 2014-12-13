@@ -6,15 +6,19 @@ import (
 )
 
 func TestThatStringIsEqualTo(t *testing.T) {
+	buffer := &bytes.Buffer{}
+	writerBackup := writer
+	writer = buffer
 	ThatString("Alice").IsEqualTo("Alice")
+	writer = writerBackup
+	assertEmpty(buffer)
 }
 
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
-	assert := func() {
-		ThatString(buffer.String()).IsEqualTo("Expected <Bob>, but was <Alice>.\n")
-	}
-	recoverAndRestore := mockWriter(buffer, assert)
-	defer recoverAndRestore()
+	writerBackup := writer
+	writer = buffer
 	ThatString("Alice").IsEqualTo("Bob")
+	writer = writerBackup
+	assertContains(buffer, "Expected <Bob>, but was <Alice>.\n")
 }
