@@ -2,14 +2,14 @@ package assert
 
 import "testing"
 
-func TestThatStringIsEqualTo(t *testing.T) {
-	buffer := &BufferT{}
-	ThatString(buffer, "Alice").IsEqualTo("Alice")
-	assertEmpty(t, buffer)
+func TestThatStringIsEqualToPrintsNothing(t *testing.T) {
+	mockT := &mockTestingT{}
+	ThatString(mockT, "Alice").IsEqualTo("Alice")
+	assertEmpty(t, mockT)
 }
 
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
-	buffer := &BufferT{}
-	ThatString(buffer, "Alice").IsEqualTo("Bob")
-	assertContains(t, buffer, "Expected <Bob>, but was <Alice>.\n")
+	mockT := &mockTestingT{}
+	ThatString(mockT, "Alice").IsEqualTo("Bob")
+	assertContains(t, mockT, "Expected <Bob>, but was <Alice>.\n")
 }

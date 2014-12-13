@@ -1,11 +1,11 @@
 package assert
 
-func ThatString(t T, actual string) *StringAssert {
+func ThatString(t TestingT, actual string) *StringAssert {
 	return &StringAssert{t, actual}
 }
 
 type StringAssert struct {
-	t      T
+	t      TestingT
 	actual string
 }
 

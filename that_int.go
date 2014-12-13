@@ -1,11 +1,11 @@
 package assert
 
-func ThatInt(t T, actual int) *IntAssert {
+func ThatInt(t TestingT, actual int) *IntAssert {
 	return &IntAssert{t, actual}
 }
 
 type IntAssert struct {
-	t      T
+	t      TestingT
 	actual int
 }
 

@@ -1,5 +1,5 @@
 package assert
 
-type T interface {
+type TestingT interface {
 	Errorf(format string, args ...interface{})
 }
