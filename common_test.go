@@ -24,5 +24,7 @@ func (mockT *mockTestingT) HasNoErrors() {
 }
 
 func (mockT *mockTestingT) HasErrorMessage(message string) {
-	ThatString(mockT.t, mockT.String()).IsEqualTo(message)
+	if mockT.String() != message {
+		mockT.t.Errorf("Expected <%s>, but was <%s>.", message, mockT.String())
+	}
 }
