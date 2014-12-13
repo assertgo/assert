@@ -40,6 +40,14 @@ func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 
 func TestThatIntIsPositivePrintsNothing(t *testing.T) {
 	mockT := newMockT(t)
+	ThatInt(mockT, 1).IsPositive()
 	ThatInt(mockT, 10).IsPositive()
 	mockT.HasNoErrors()
+}
+
+func TestThatIntIsPositivePrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsPositive()
+	ThatInt(mockT, -10).IsPositive()
+	mockT.HasErrorMessage("Expected positive integer, but was <0>.\nExpected positive integer, but was <-10>.\n")
 }

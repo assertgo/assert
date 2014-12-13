@@ -21,5 +21,8 @@ func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
 }
 
 func (assert *IntAssert) IsPositive() *IntAssert {
+	if assert.actual <= 0 {
+		assert.t.Errorf("Expected positive integer, but was <%d>.\n", assert.actual)
+	}
 	return assert
 }
