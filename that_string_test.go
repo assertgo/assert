@@ -9,16 +9,16 @@ func TestThatStringIsEqualTo(t *testing.T) {
 	buffer := &bytes.Buffer{}
 	writerBackup := writer
 	writer = buffer
-	ThatString("Alice").IsEqualTo("Alice")
+	ThatString(t, "Alice").IsEqualTo("Alice")
 	writer = writerBackup
-	assertEmpty(buffer)
+	assertEmpty(t, buffer)
 }
 
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
 	writerBackup := writer
 	writer = buffer
-	ThatString("Alice").IsEqualTo("Bob")
+	ThatString(t, "Alice").IsEqualTo("Bob")
 	writer = writerBackup
-	assertContains(buffer, "Expected <Bob>, but was <Alice>.\n")
+	assertContains(t, buffer, "Expected <Bob>, but was <Alice>.\n")
 }

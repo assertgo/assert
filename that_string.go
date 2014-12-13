@@ -1,13 +1,22 @@
 package assert
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
-type ThatString string
+func ThatString(t *testing.T, actual string) *StringAssert {
+	return &StringAssert{t, actual}
+}
 
-func (actual ThatString) IsEqualTo(expected string) ThatString {
-	if string(actual) != expected {
-		message := fmt.Sprintf("Expected <%s>, but was <%s>.\n", expected, actual)
-		fmt.Fprint(writer, message)
+type StringAssert struct {
+	t      *testing.T
+	actual string
+}
+
+func (assert *StringAssert) IsEqualTo(expected string) *StringAssert {
+	if assert.actual != expected {
+		fmt.Fprintf(writer, "Expected <%s>, but was <%s>.\n", expected, assert.actual)
 	}
-	return actual
+	return assert
 }
