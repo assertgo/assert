@@ -8,16 +8,17 @@ import (
 
 type mockTestingT struct {
 	bytes.Buffer
+	t *testing.T
 }
 
 func (mockT *mockTestingT) Errorf(format string, args ...interface{}) {
 	mockT.WriteString(fmt.Sprintf(format, args...))
 }
 
-func (mockT *mockTestingT) assertEmpty(t *testing.T) {
-	mockT.assertContains(t, "")
+func (mockT *mockTestingT) assertEmpty() {
+	mockT.assertContains("")
 }
 
-func (mockT *mockTestingT) assertContains(t *testing.T, contents string) {
-	ThatString(t, mockT.String()).IsEqualTo(contents)
+func (mockT *mockTestingT) assertContains(contents string) {
+	ThatString(mockT.t, mockT.String()).IsEqualTo(contents)
 }
