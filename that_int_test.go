@@ -22,22 +22,16 @@ func TestThatIntChainedPrintsNothing(t *testing.T) {
 
 func TestThatIntChainedPrintsAllMessages(t *testing.T) {
 	buffer := &bytes.Buffer{}
-	assert := func() {
-		assertContains(buffer, "Expected <0>, but was <2>.\nExpected <1>, but was <2>.\n")
-	}
-	recoverAndRestore := mockWriter(buffer, assert)
-	defer recoverAndRestore()
+	writer = buffer
 	ThatInt(2).IsZero().IsEqualTo(1)
+	assertContains(buffer, "Expected <0>, but was <2>.\nExpected <1>, but was <2>.\n")
 }
 
 func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
-	assert := func() {
-		ThatString(buffer.String()).IsEqualTo("Expected <0>, but was <6>.\n")
-	}
-	recoverAndRestore := mockWriter(buffer, assert)
-	defer recoverAndRestore()
+	writer = buffer
 	ThatInt(6).IsZero()
+	ThatString(buffer.String()).IsEqualTo("Expected <0>, but was <6>.\n")
 }
 
 func TestThatIntIsEqualTo(t *testing.T) {
@@ -46,12 +40,9 @@ func TestThatIntIsEqualTo(t *testing.T) {
 
 func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
-	assert := func() {
-		ThatString(buffer.String()).IsEqualTo("Expected <2>, but was <1>.\n")
-	}
-	recoverAndRestore := mockWriter(buffer, assert)
-	defer recoverAndRestore()
+	writer = buffer
 	ThatInt(1).IsEqualTo(2)
+	ThatString(buffer.String()).IsEqualTo("Expected <2>, but was <1>.\n")
 }
 
 func mockWriter(writerDouble io.Writer, asserts ...func()) func() {
