@@ -4,9 +4,10 @@ import "fmt"
 
 type ThatString string
 
-func (thatString ThatString) IsEqualTo(comparedString string) {
-	if string(thatString) != comparedString {
-		fmt.Fprintf(writer, "Expected <%s>, but was <%s>.\n", thatString, comparedString)
-		panic("Expected string to be equal but wasn't.")
+func (actual ThatString) IsEqualTo(expected string) {
+	if string(actual) != expected {
+		message := fmt.Sprintf("Expected <%s>, but was <%s>.\n", expected, actual)
+		fmt.Fprint(writer, message)
+		panic(message)
 	}
 }
