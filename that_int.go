@@ -11,11 +11,7 @@ var writer io.Writer = os.Stdout
 type ThatInt int
 
 func (thatInt ThatInt) IsZero() ThatInt {
-	if thatInt != 0 {
-		fmt.Fprintf(writer, "Expected <0>, but was <%d>.\n", thatInt)
-		panic("Expected int to be zero but wasn't.")
-	}
-	return thatInt
+	return thatInt.IsEqualTo(0)
 }
 
 func (thatInt ThatInt) IsEqualTo(comparedInt int) ThatInt {
