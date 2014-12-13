@@ -51,3 +51,17 @@ func TestThatIntIsPositivePrintsMessage(t *testing.T) {
 	ThatInt(mockT, -10).IsPositive()
 	mockT.HasErrorMessage("Expected positive integer, but was <0>.\nExpected positive integer, but was <-10>.\n")
 }
+
+func TestThatIntIsNegativePrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, -1).IsNegative()
+	ThatInt(mockT, -100).IsNegative()
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNegativePrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsNegative()
+	ThatInt(mockT, 100).IsNegative()
+	mockT.HasErrorMessage("Expected negative integer, but was <0>.\nExpected negative integer, but was <100>.\n")
+}

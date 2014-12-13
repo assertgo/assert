@@ -26,3 +26,10 @@ func (assert *IntAssert) IsPositive() *IntAssert {
 	}
 	return assert
 }
+
+func (assert *IntAssert) IsNegative() *IntAssert {
+	if assert.actual >= 0 {
+		assert.t.Errorf("Expected negative integer, but was <%d>.\n", assert.actual)
+	}
+	return assert
+}
