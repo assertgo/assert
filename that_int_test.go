@@ -38,7 +38,7 @@ func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 	writer = buffer
 	ThatInt(6).IsZero()
 	writer = writerBackup
-	ThatString(buffer.String()).IsEqualTo("Expected <0>, but was <6>.\n")
+	assertContains(buffer, "Expected <0>, but was <6>.\n")
 }
 
 func TestThatIntIsEqualTo(t *testing.T) {
@@ -56,11 +56,11 @@ func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	writer = buffer
 	ThatInt(1).IsEqualTo(2)
 	writer = writerBackup
-	ThatString(buffer.String()).IsEqualTo("Expected <2>, but was <1>.\n")
+	assertContains(buffer, "Expected <2>, but was <1>.\n")
 }
 
 func assertEmpty(buffer *bytes.Buffer) {
-	ThatString(buffer.String()).IsEqualTo("")
+	assertContains(buffer, "")
 }
 
 func assertContains(buffer *bytes.Buffer, contents string) {
