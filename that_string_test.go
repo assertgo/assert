@@ -2,19 +2,11 @@ package assert
 
 import (
 	"bytes"
-	"io/ioutil"
 	"testing"
 )
 
 func TestThatStringIsEqualTo(t *testing.T) {
 	ThatString("Alice").IsEqualTo("Alice")
-}
-
-func TestThatStringIsEqualToFails(t *testing.T) {
-	recoverAndRestore := mockWriter(ioutil.Discard)
-	defer recoverAndRestore()
-	ThatString("Alice").IsEqualTo("Bob")
-	t.Fail()
 }
 
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
