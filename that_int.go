@@ -17,7 +17,6 @@ func (actual ThatInt) IsZero() ThatInt {
 func (actual ThatInt) IsEqualTo(expected int) ThatInt {
 	if int(actual) != expected {
 		fmt.Fprintf(writer, "Expected <%d>, but was <%d>.\n", expected, actual)
-		panic("Expected int to be equal but wasn't.")
 	}
 	return actual
 }

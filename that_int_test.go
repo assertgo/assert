@@ -3,7 +3,6 @@ package assert
 import (
 	"bytes"
 	"io"
-	"io/ioutil"
 	"testing"
 )
 
@@ -21,11 +20,14 @@ func TestThatIntChainedPrintsNothing(t *testing.T) {
 	assertEmpty(buffer)
 }
 
-func TestThatIntIsZeroFails(t *testing.T) {
-	recoverAndRestore := mockWriter(ioutil.Discard)
+func TestThatIntChainedPrintsAllMessages(t *testing.T) {
+	buffer := &bytes.Buffer{}
+	assert := func() {
+		assertContains(buffer, "Expected <0>, but was <2>.\nExpected <1>, but was <2>.\n")
+	}
+	recoverAndRestore := mockWriter(buffer, assert)
 	defer recoverAndRestore()
-	ThatInt(1).IsZero()
-	t.Fail()
+	ThatInt(2).IsZero().IsEqualTo(1)
 }
 
 func TestThatIntIsZeroPrintsMessage(t *testing.T) {
@@ -40,13 +42,6 @@ func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 
 func TestThatIntIsEqualTo(t *testing.T) {
 	ThatInt(1).IsEqualTo(1)
-}
-
-func TestThatIntIsEqualToFails(t *testing.T) {
-	recoverAndRestore := mockWriter(ioutil.Discard)
-	defer recoverAndRestore()
-	ThatInt(1).IsEqualTo(2)
-	t.Fail()
 }
 
 func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
@@ -77,4 +72,8 @@ func callAsserts(asserts ...func()) {
 
 func assertEmpty(buffer *bytes.Buffer) {
 	ThatString(buffer.String()).IsEqualTo("")
+}
+
+func assertContains(buffer *bytes.Buffer, contents string) {
+	ThatString(buffer.String()).IsEqualTo(contents)
 }
