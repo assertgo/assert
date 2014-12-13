@@ -14,6 +14,13 @@ func TestThatIntIsZeroPrintsNothing(t *testing.T) {
 	assertEmpty(buffer)
 }
 
+func TestThatIntChainedPrintsNothing(t *testing.T) {
+	buffer := &bytes.Buffer{}
+	writer = buffer
+	ThatInt(0).IsZero().IsEqualTo(0)
+	assertEmpty(buffer)
+}
+
 func TestThatIntIsZeroFails(t *testing.T) {
 	recoverAndRestore := mockWriter(ioutil.Discard)
 	defer recoverAndRestore()
