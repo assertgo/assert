@@ -52,7 +52,7 @@ func TestThatIntIsEqualToFails(t *testing.T) {
 func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
 	assert := func() {
-		ThatString(buffer.String()).IsEqualTo("Expected <1>, but was <2>.\n")
+		ThatString(buffer.String()).IsEqualTo("Expected <2>, but was <1>.\n")
 	}
 	recoverAndRestore := mockWriter(buffer, assert)
 	defer recoverAndRestore()

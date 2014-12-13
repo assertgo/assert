@@ -20,7 +20,7 @@ func (thatInt ThatInt) IsZero() ThatInt {
 
 func (thatInt ThatInt) IsEqualTo(comparedInt int) ThatInt {
 	if int(thatInt) != comparedInt {
-		fmt.Fprintf(writer, "Expected <%d>, but was <%d>.\n", thatInt, comparedInt)
+		fmt.Fprintf(writer, "Expected <%d>, but was <%d>.\n", comparedInt, thatInt)
 		panic("Expected int to be equal but wasn't.")
 	}
 	return thatInt
