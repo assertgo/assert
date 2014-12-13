@@ -7,8 +7,11 @@ import (
 	"testing"
 )
 
-func TestThatIntIsZero(t *testing.T) {
+func TestThatIntIsZeroPrintsNothing(t *testing.T) {
+	buffer := &bytes.Buffer{}
+	writer = buffer
 	ThatInt(0).IsZero()
+	assertEmpty(buffer)
 }
 
 func TestThatIntIsZeroFails(t *testing.T) {
@@ -63,4 +66,8 @@ func callAsserts(asserts ...func()) {
 	for _, assert := range asserts {
 		assert()
 	}
+}
+
+func assertEmpty(buffer *bytes.Buffer) {
+	ThatString(buffer.String()).IsEqualTo("")
 }
