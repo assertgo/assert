@@ -11,6 +11,10 @@ type mockTestingT struct {
 	t *testing.T
 }
 
+func newMockT(t *testing.T) *mockTestingT {
+	return &mockTestingT{t: t}
+}
+
 func (mockT *mockTestingT) Errorf(format string, args ...interface{}) {
 	mockT.WriteString(fmt.Sprintf(format, args...))
 }
