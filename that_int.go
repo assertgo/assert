@@ -1,9 +1,5 @@
 package assert
 
-type T interface {
-	Errorf(format string, args ...interface{})
-}
-
 func ThatInt(t T, actual int) *IntAssert {
 	return &IntAssert{t, actual}
 }
