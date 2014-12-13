@@ -58,7 +58,6 @@ func mockWriter(writerDouble io.Writer, asserts ...func()) func() {
 	writerBackup := writer
 	writer = writerDouble
 	return func() {
-		recover()
 		callAsserts(asserts...)
 		writer = writerBackup
 	}
