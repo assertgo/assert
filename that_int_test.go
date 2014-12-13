@@ -37,3 +37,9 @@ func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	ThatInt(mockT, 1).IsEqualTo(2)
 	mockT.HasErrorMessage("Expected <2>, but was <1>.\n")
 }
+
+func TestThatIntIsPositivePrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 10).IsPositive()
+	mockT.HasNoErrors()
+}

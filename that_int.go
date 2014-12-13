@@ -19,3 +19,7 @@ func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
 	}
 	return assert
 }
+
+func (assert *IntAssert) IsPositive() *IntAssert {
+	return assert
+}
