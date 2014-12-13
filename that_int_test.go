@@ -21,9 +21,7 @@ func TestThatIntIsZeroFails(t *testing.T) {
 func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
 	assert := func() {
-		if buffer.String() != "Expected <0>, but was <6>.\n" {
-			t.Error("Expected <Expected <0>, but was <6>.\n>, but was <" + buffer.String() + ">.")
-		}
+		ThatString(buffer.String()).IsEqualTo("Expected <0>, but was <6>.\n")
 	}
 	recoverAndRestore := mockWriter(buffer, assert)
 	defer recoverAndRestore()
@@ -41,12 +39,10 @@ func TestThatIntIsEqualToFails(t *testing.T) {
 	t.Fail()
 }
 
-func ThestThatIntIsEqualToPrintsMessage(t *testing.T) {
+func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
 	assert := func() {
-		if buffer.String() != "Expected <1>, but was <2>.\n" {
-			t.Error("Expected <Expected <1>, but was <2>.\n>, but was <" + buffer.String() + ">.")
-		}
+		ThatString(buffer.String()).IsEqualTo("Expected <1>, but was <2>.\n")
 	}
 	recoverAndRestore := mockWriter(buffer, assert)
 	defer recoverAndRestore()

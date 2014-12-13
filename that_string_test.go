@@ -20,9 +20,7 @@ func TestThatStringIsEqualToFails(t *testing.T) {
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
 	buffer := &bytes.Buffer{}
 	assert := func() {
-		if buffer.String() != "Expected <Alice has a cat.>, but was <Bob has a dog.>.\n" {
-			t.Error("Expected <Expected <Alice has a cat.>, but was <Bob has a dog.>\n.>, but was <" + buffer.String() + ">.")
-		}
+		ThatString(buffer.String()).IsEqualTo("Expected <Alice has a cat.>, but was <Bob has a dog.>.\n")
 	}
 	recoverAndRestore := mockWriter(buffer, assert)
 	defer recoverAndRestore()
