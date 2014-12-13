@@ -1,24 +1,15 @@
 package assert
 
-import (
-	"bytes"
-	"testing"
-)
+import "testing"
 
 func TestThatStringIsEqualTo(t *testing.T) {
-	buffer := &bytes.Buffer{}
-	writerBackup := writer
-	writer = buffer
-	ThatString(t, "Alice").IsEqualTo("Alice")
-	writer = writerBackup
+	buffer := &BufferT{}
+	ThatString(buffer, "Alice").IsEqualTo("Alice")
 	assertEmpty(t, buffer)
 }
 
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
-	buffer := &bytes.Buffer{}
-	writerBackup := writer
-	writer = buffer
-	ThatString(t, "Alice").IsEqualTo("Bob")
-	writer = writerBackup
+	buffer := &BufferT{}
+	ThatString(buffer, "Alice").IsEqualTo("Bob")
 	assertContains(t, buffer, "Expected <Bob>, but was <Alice>.\n")
 }

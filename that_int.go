@@ -1,20 +1,15 @@
 package assert
 
-import (
-	"fmt"
-	"io"
-	"os"
-	"testing"
-)
+type T interface {
+	Errorf(format string, args ...interface{})
+}
 
-var writer io.Writer = os.Stdout
-
-func ThatInt(t *testing.T, actual int) *IntAssert {
+func ThatInt(t T, actual int) *IntAssert {
 	return &IntAssert{t, actual}
 }
 
 type IntAssert struct {
-	t      *testing.T
+	t      T
 	actual int
 }
 
@@ -24,7 +19,7 @@ func (assert *IntAssert) IsZero() *IntAssert {
 
 func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
 	if assert.actual != expected {
-		fmt.Fprintf(writer, "Expected <%d>, but was <%d>.\n", expected, assert.actual)
+		assert.t.Errorf("Expected <%d>, but was <%d>.\n", expected, assert.actual)
 	}
 	return assert
 }
