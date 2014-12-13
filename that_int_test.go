@@ -2,6 +2,8 @@ package assert
 
 import (
 	"bytes"
+	"io"
+	"io/ioutil"
 	"testing"
 )
 
@@ -10,25 +12,36 @@ func TestThatIntIsZero(t *testing.T) {
 }
 
 func TestThatIntIsZeroFails(t *testing.T) {
-	defer _recover()
+	recoverAndRestore := mockWriter(ioutil.Discard)
+	defer recoverAndRestore()
 	ThatInt(1).IsZero()
 	t.Fail()
 }
 
 func TestThatIntIsZeroPrintsMessage(t *testing.T) {
-	b := &bytes.Buffer{}
-	prod := writer
-	writer = b
-	defer func() {
-		recover()
-		if b.String() != "Expected <0>, but was <1>.\n" {
+	buffer := &bytes.Buffer{}
+	assert := func() {
+		if buffer.String() != "Expected <0>, but was <1>.\n" {
 			t.Fail()
 		}
-		writer = prod
-	}()
+	}
+	recoverAndRestore := mockWriter(buffer, assert)
+	defer recoverAndRestore()
 	ThatInt(1).IsZero()
 }
 
-func _recover() {
-	recover()
+func mockWriter(writerDouble io.Writer, asserts ...func()) func() {
+	writerBackup := writer
+	writer = writerDouble
+	return func() {
+		recover()
+		callAsserts(asserts...)
+		writer = writerBackup
+	}
+}
+
+func callAsserts(asserts ...func()) {
+	for _, assert := range asserts {
+		assert()
+	}
 }
