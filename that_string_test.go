@@ -5,11 +5,11 @@ import "testing"
 func TestThatStringIsEqualToPrintsNothing(t *testing.T) {
 	mockT := &mockTestingT{}
 	ThatString(mockT, "Alice").IsEqualTo("Alice")
-	assertEmpty(t, mockT)
+	mockT.assertEmpty(t)
 }
 
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
 	mockT := &mockTestingT{}
 	ThatString(mockT, "Alice").IsEqualTo("Bob")
-	assertContains(t, mockT, "Expected <Bob>, but was <Alice>.\n")
+	mockT.assertContains(t, "Expected <Bob>, but was <Alice>.\n")
 }

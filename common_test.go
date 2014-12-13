@@ -14,10 +14,10 @@ func (mockT *mockTestingT) Errorf(format string, args ...interface{}) {
 	mockT.WriteString(fmt.Sprintf(format, args...))
 }
 
-func assertEmpty(t *testing.T, mockT *mockTestingT) {
-	assertContains(t, mockT, "")
+func (mockT *mockTestingT) assertEmpty(t *testing.T) {
+	mockT.assertContains(t, "")
 }
 
-func assertContains(t *testing.T, mockT *mockTestingT, contents string) {
+func (mockT *mockTestingT) assertContains(t *testing.T, contents string) {
 	ThatString(t, mockT.String()).IsEqualTo(contents)
 }
