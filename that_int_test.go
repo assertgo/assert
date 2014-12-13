@@ -1,18 +1,6 @@
 package assert
 
-import (
-	"bytes"
-	"fmt"
-	"testing"
-)
-
-type BufferT struct {
-	b bytes.Buffer
-}
-
-func (buffer *BufferT) Errorf(format string, args ...interface{}) {
-	buffer.b.WriteString(fmt.Sprintf(format, args...))
-}
+import "testing"
 
 func TestThatIntIsZeroPrintsNothing(t *testing.T) {
 	buffer := &BufferT{}
@@ -48,12 +36,4 @@ func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	buffer := &BufferT{}
 	ThatInt(buffer, 1).IsEqualTo(2)
 	assertContains(t, buffer, "Expected <2>, but was <1>.\n")
-}
-
-func assertEmpty(t *testing.T, buffer *BufferT) {
-	assertContains(t, buffer, "")
-}
-
-func assertContains(t *testing.T, buffer *BufferT, contents string) {
-	ThatString(t, buffer.b.String()).IsEqualTo(contents)
 }
