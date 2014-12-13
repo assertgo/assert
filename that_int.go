@@ -16,3 +16,10 @@ func (thatInt ThatInt) IsZero() {
 		panic("that int should be zero")
 	}
 }
+
+func (thatInt ThatInt) IsEqualTo(comparedInt int) {
+	if int(thatInt) != comparedInt {
+		fmt.Fprintf(writer, "Expected <%d>, but was <%d>.\n", thatInt, comparedInt)
+		panic("that int should be equal to compared int")
+	}
+}
