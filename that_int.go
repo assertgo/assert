@@ -65,3 +65,13 @@ func (assert *IntAssert) IsGreaterOrEqualTo(smaller int) *IntAssert {
 	return assert.isTrue(assert.actual >= smaller,
 		"Expected integer greater or equal to <%d>, but was <%d>.", smaller, assert.actual)
 }
+
+func (assert *IntAssert) IsLessThan(greaterOrEqual int) *IntAssert {
+	return assert.isTrue(assert.actual < greaterOrEqual,
+		"Expected integer lesser than <%d>, but was <%d>.", greaterOrEqual, assert.actual)
+}
+
+func (assert *IntAssert) IsLessOrEqualTo(greater int) *IntAssert {
+	return assert.isTrue(assert.actual <= greater,
+		"Expected integer lesser or equal to <%d>, but was <%d>.", greater, assert.actual)
+}

@@ -147,3 +147,31 @@ func TestThatIntIsGreaterOrEqualToPrintsMessage(t *testing.T) {
 		"Expected integer greater or equal to <-1>, but was <-2>.",
 		"Expected integer greater or equal to <128>, but was <-2>.")
 }
+
+func TestThatIntIsLessThanPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 28).IsLessThan(29).IsLessThan(999)
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsLessThanPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 28).IsLessThan(28).IsLessThan(0)
+	mockT.HasErrorMessages(
+		"Expected integer lesser than <28>, but was <28>.",
+		"Expected integer lesser than <0>, but was <28>.")
+}
+
+func TestThatIntIsLessOrEqualToPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, -6).IsLessOrEqualTo(-6).IsLessOrEqualTo(6)
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsLessOrEqualToPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, -6).IsLessOrEqualTo(-7).IsLessOrEqualTo(-128)
+	mockT.HasErrorMessages(
+		"Expected integer lesser or equal to <-7>, but was <-6>.",
+		"Expected integer lesser or equal to <-128>, but was <-6>.")
+}
