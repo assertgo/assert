@@ -17,13 +17,16 @@ func TestThatIntChainedPrintsNothing(t *testing.T) {
 func TestThatIntChainedPrintsAllMessages(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 2).IsZero().IsEqualTo(1)
-	mockT.HasErrorMessages("Expected <0>, but was <2>.", "Expected <1>, but was <2>.")
+	mockT.HasErrorMessages(
+		"Expected <0>, but was <2>.",
+		"Expected <1>, but was <2>.")
 }
 
 func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 6).IsZero()
-	mockT.HasErrorMessages("Expected <0>, but was <6>.")
+	mockT.HasErrorMessages(
+		"Expected <0>, but was <6>.")
 }
 
 func TestThatIntIsEqualToPrintsNothing(t *testing.T) {
@@ -35,7 +38,8 @@ func TestThatIntIsEqualToPrintsNothing(t *testing.T) {
 func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 1).IsEqualTo(2)
-	mockT.HasErrorMessages("Expected <2>, but was <1>.")
+	mockT.HasErrorMessages(
+		"Expected <2>, but was <1>.")
 }
 
 func TestThatIntIsPositivePrintsNothing(t *testing.T) {
@@ -49,7 +53,9 @@ func TestThatIntIsPositivePrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 0).IsPositive()
 	ThatInt(mockT, -10).IsPositive()
-	mockT.HasErrorMessages("Expected positive integer, but was <0>.", "Expected positive integer, but was <-10>.")
+	mockT.HasErrorMessages(
+		"Expected positive integer, but was <0>.",
+		"Expected positive integer, but was <-10>.")
 }
 
 func TestThatIntIsNegativePrintsNothing(t *testing.T) {
@@ -63,7 +69,9 @@ func TestThatIntIsNegativePrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 0).IsNegative()
 	ThatInt(mockT, 100).IsNegative()
-	mockT.HasErrorMessages("Expected negative integer, but was <0>.", "Expected negative integer, but was <100>.")
+	mockT.HasErrorMessages(
+		"Expected negative integer, but was <0>.",
+		"Expected negative integer, but was <100>.")
 }
 
 func TestThatIntIsGreaterThanPrintsNothing(t *testing.T) {
@@ -75,7 +83,9 @@ func TestThatIntIsGreaterThanPrintsNothing(t *testing.T) {
 func TestThatIntIsGreaterThanPrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 4).IsGreaterThan(4).IsGreaterThan(777)
-	mockT.HasErrorMessages("Expected integer greater than <4>, but was <4>.", "Expected integer greater than <777>, but was <4>.")
+	mockT.HasErrorMessages(
+		"Expected integer greater than <4>, but was <4>.",
+		"Expected integer greater than <777>, but was <4>.")
 }
 
 func TestThatIntIsGreaterOrEqualToPrintsNothing(t *testing.T) {
@@ -87,5 +97,7 @@ func TestThatIntIsGreaterOrEqualToPrintsNothing(t *testing.T) {
 func TestThatIntIsGreaterOrEqualToPrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, -2).IsGreaterOrEqualTo(-1).IsGreaterOrEqualTo(128)
-	mockT.HasErrorMessages("Expected integer greater or equal to <-1>, but was <-2>.", "Expected integer greater or equal to <128>, but was <-2>.")
+	mockT.HasErrorMessages(
+		"Expected integer greater or equal to <-1>, but was <-2>.",
+		"Expected integer greater or equal to <128>, but was <-2>.")
 }
