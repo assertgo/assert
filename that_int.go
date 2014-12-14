@@ -96,6 +96,11 @@ func (assert *IntAssert) IsIn(expected ...int) *IntAssert {
 		"Expected integer to be in (%s), but was <%d>.", strings.Join(strSlice(expected...), ", "), assert.actual)
 }
 
+func (assert *IntAssert) IsNotIn(expected ...int) *IntAssert {
+	return assert.isTrue(!assert.isIn(expected...),
+		"Expected integer not to be in (%s), but was <%d>.", strings.Join(strSlice(expected...), ", "), assert.actual)
+}
+
 func (assert *IntAssert) isIn(expected ...int) bool {
 	for _, v := range expected {
 		if assert.actual == v {

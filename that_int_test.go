@@ -218,3 +218,17 @@ func TestThatIntIsInPrintsMessage(t *testing.T) {
 		"Expected integer to be in (1, 2, 3, 5, 8, 13), but was <6>.",
 		"Expected integer to be in (2, 3, 5, 7, 11), but was <6>.")
 }
+
+func TestThatIntIsNotInPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 6).IsNotIn(1, 2, 3, 5, 8, 13).IsNotIn(2, 3, 5, 7, 11)
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNotInPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 5).IsNotIn(1, 2, 3, 5, 8, 13).IsNotIn(2, 3, 5, 7, 11)
+	mockT.HasErrorMessages(
+		"Expected integer not to be in (1, 2, 3, 5, 8, 13), but was <5>.",
+		"Expected integer not to be in (2, 3, 5, 7, 11), but was <5>.")
+}
