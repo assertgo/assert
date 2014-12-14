@@ -40,3 +40,10 @@ func (assert *IntAssert) IsGreaterThan(smallerOrEqual int) *IntAssert {
 	}
 	return assert
 }
+
+func (assert *IntAssert) IsGreaterOrEqualTo(smaller int) *IntAssert {
+	if assert.actual < smaller {
+		assert.t.Errorf("Expected integer greater or equal to <%d>, but was <%d>.\n", smaller, assert.actual)
+	}
+	return assert
+}
