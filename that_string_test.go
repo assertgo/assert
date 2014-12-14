@@ -28,3 +28,16 @@ func TestThatStringIsNotEqualToPrintsMessage(t *testing.T) {
 	mockT.HasErrorMessages(
 		"Expected string not equal to <Alice>, but was equal.")
 }
+
+func TestThatStringIsEmptyPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "").IsEmpty()
+	mockT.HasNoErrors()
+}
+
+func TestThatStringIsEmptyPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").IsEmpty()
+	mockT.HasErrorMessages(
+		"Expected string to be empty, but was <Marta>.")
+}

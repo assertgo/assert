@@ -21,3 +21,8 @@ func (assert *stringAssertImpl) IsNotEqualTo(nonexpected string) StringAssert {
 	return assert.isTrue(assert.actual != nonexpected,
 		"Expected string not equal to <%s>, but was equal.", nonexpected)
 }
+
+func (assert *stringAssertImpl) IsEmpty() StringAssert {
+	return assert.isTrue(assert.actual == "",
+		"Expected string to be empty, but was <%s>.", assert.actual)
+}
