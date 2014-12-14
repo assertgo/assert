@@ -189,3 +189,18 @@ func TestThatIntIsBetweenPrintsMessage(t *testing.T) {
 		"Expected integer to be between <-42, -1>, but was <0>.",
 		"Expected integer to be between <1, 42>, but was <0>.")
 }
+
+func TestThatIntIsNotBetweenPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsNotBetween(-42, -1).IsNotBetween(1, 42)
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNotBetweenPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsNotBetween(-42, 0).IsNotBetween(-5, 5).IsNotBetween(0, 42)
+	mockT.HasErrorMessages(
+		"Expected integer not to be between <-42, 0>, but was <0>.",
+		"Expected integer not to be between <-5, 5>, but was <0>.",
+		"Expected integer not to be between <0, 42>, but was <0>.")
+}

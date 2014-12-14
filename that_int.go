@@ -80,3 +80,8 @@ func (assert *IntAssert) IsBetween(lesserOrEqual, greaterOrEqual int) *IntAssert
 	return assert.isTrue(lesserOrEqual <= assert.actual && assert.actual <= greaterOrEqual,
 		"Expected integer to be between <%d, %d>, but was <%d>.", lesserOrEqual, greaterOrEqual, assert.actual)
 }
+
+func (assert *IntAssert) IsNotBetween(nonlesser, nongreater int) *IntAssert {
+	return assert.isTrue(assert.actual < nonlesser || assert.actual > nongreater,
+		"Expected integer not to be between <%d, %d>, but was <%d>.", nonlesser, nongreater, assert.actual)
+}
