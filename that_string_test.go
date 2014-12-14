@@ -11,5 +11,5 @@ func TestThatStringIsEqualToPrintsNothing(t *testing.T) {
 func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Alice").IsEqualTo("Bob")
-	mockT.HasErrorMessages("Expected <Bob>, but was <Alice>.\n")
+	mockT.HasErrorMessages("Expected <Bob>, but was <Alice>.")
 }

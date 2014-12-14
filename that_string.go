@@ -11,7 +11,7 @@ type StringAssert struct {
 
 func (assert *StringAssert) IsEqualTo(expected string) *StringAssert {
 	if assert.actual != expected {
-		assert.t.Errorf("Expected <%s>, but was <%s>.\n", expected, assert.actual)
+		assert.t.Errorf("Expected <%s>, but was <%s>.", expected, assert.actual)
 	}
 	return assert
 }
