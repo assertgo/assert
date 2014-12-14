@@ -56,22 +56,22 @@ func (assert *IntAssert) IsNonnegative() *IntAssert {
 		"Expected nonnegative integer, but was <%d>.", assert.actual)
 }
 
-func (assert *IntAssert) IsGreaterThan(lesserOrEqual int) *IntAssert {
-	return assert.isTrue(assert.actual > lesserOrEqual,
-		"Expected integer greater than <%d>, but was <%d>.", lesserOrEqual, assert.actual)
+func (assert *IntAssert) IsGreaterThan(lesser int) *IntAssert {
+	return assert.isTrue(assert.actual > lesser,
+		"Expected integer greater than <%d>, but was <%d>.", lesser, assert.actual)
 }
 
-func (assert *IntAssert) IsGreaterOrEqualTo(lesser int) *IntAssert {
-	return assert.isTrue(assert.actual >= lesser,
-		"Expected integer greater or equal to <%d>, but was <%d>.", lesser, assert.actual)
+func (assert *IntAssert) IsGreaterOrEqualTo(lesserOrEqual int) *IntAssert {
+	return assert.isTrue(assert.actual >= lesserOrEqual,
+		"Expected integer greater or equal to <%d>, but was <%d>.", lesserOrEqual, assert.actual)
 }
 
-func (assert *IntAssert) IsLessThan(greaterOrEqual int) *IntAssert {
-	return assert.isTrue(assert.actual < greaterOrEqual,
-		"Expected integer lesser than <%d>, but was <%d>.", greaterOrEqual, assert.actual)
+func (assert *IntAssert) IsLessThan(greater int) *IntAssert {
+	return assert.isTrue(assert.actual < greater,
+		"Expected integer lesser than <%d>, but was <%d>.", greater, assert.actual)
 }
 
-func (assert *IntAssert) IsLessOrEqualTo(greater int) *IntAssert {
-	return assert.isTrue(assert.actual <= greater,
-		"Expected integer lesser or equal to <%d>, but was <%d>.", greater, assert.actual)
+func (assert *IntAssert) IsLessOrEqualTo(greaterOrEqual int) *IntAssert {
+	return assert.isTrue(assert.actual <= greaterOrEqual,
+		"Expected integer lesser or equal to <%d>, but was <%d>.", greaterOrEqual, assert.actual)
 }
