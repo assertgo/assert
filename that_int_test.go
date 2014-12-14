@@ -15,6 +15,21 @@ func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 		"Expected zero, but was <6>.")
 }
 
+func TestThatIntIsNonzeroPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, -1).IsNonzero()
+	ThatInt(mockT, 1).IsNonzero()
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNonzeroPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsNonzero().IsNonzero()
+	mockT.HasErrorMessages(
+		"Expected nonzero, but was zero.",
+		"Expected nonzero, but was zero.")
+}
+
 func TestThatIntIsEqualToPrintsNothing(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 1).IsEqualTo(1).IsEqualTo(1)

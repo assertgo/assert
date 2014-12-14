@@ -21,6 +21,11 @@ func (assert *IntAssert) IsZero() *IntAssert {
 		"Expected zero, but was <%d>.", assert.actual)
 }
 
+func (assert *IntAssert) IsNonzero() *IntAssert {
+	return assert.isTrue(assert.actual != 0,
+		"Expected nonzero, but was zero.")
+}
+
 func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
 	return assert.isTrue(assert.actual == expected,
 		"Expected integer equal to <%d>, but was <%d>.", expected, assert.actual)
