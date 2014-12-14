@@ -41,3 +41,16 @@ func TestThatStringIsEmptyPrintsMessage(t *testing.T) {
 	mockT.HasErrorMessages(
 		"Expected string to be empty, but was <Marta>.")
 }
+
+func TestThatStringIsInSlicePrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").IsInSlice([]string{"Marta"})
+	mockT.HasNoErrors()
+}
+
+func TestThatStringIsInSlicePrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").IsInSlice([]string{"Michal", "Macy"})
+	mockT.HasErrorMessages(
+		"Expected string to be in slice <[Michal Macy]>, but wasn't.")
+}

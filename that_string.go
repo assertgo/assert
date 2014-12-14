@@ -8,4 +8,5 @@ type StringAssert interface {
 	IsEqualTo(expected string) StringAssert
 	IsNotEqualTo(expected string) StringAssert
 	IsEmpty() StringAssert
+	IsInSlice(expectedSlice []string) StringAssert
 }
