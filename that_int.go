@@ -9,8 +9,11 @@ type IntAssert struct {
 	actual int
 }
 
-func (assert *IntAssert) logf(format string, args ...interface{}) {
-	assert.t.Errorf(format, args...)
+func (assert *IntAssert) isTrue(condition bool, format string, args ...interface{}) *IntAssert {
+	if !condition {
+		assert.t.Errorf(format, args...)
+	}
+	return assert
 }
 
 func (assert *IntAssert) IsZero() *IntAssert {
@@ -18,36 +21,26 @@ func (assert *IntAssert) IsZero() *IntAssert {
 }
 
 func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
-	if assert.actual != expected {
-		assert.logf("Expected <%d>, but was <%d>.", expected, assert.actual)
-	}
-	return assert
+	return assert.isTrue(assert.actual == expected,
+		"Expected <%d>, but was <%d>.", expected, assert.actual)
 }
 
 func (assert *IntAssert) IsPositive() *IntAssert {
-	if assert.actual <= 0 {
-		assert.logf("Expected positive integer, but was <%d>.", assert.actual)
-	}
-	return assert
+	return assert.isTrue(assert.actual > 0,
+		"Expected positive integer, but was <%d>.", assert.actual)
 }
 
 func (assert *IntAssert) IsNegative() *IntAssert {
-	if assert.actual >= 0 {
-		assert.logf("Expected negative integer, but was <%d>.", assert.actual)
-	}
-	return assert
+	return assert.isTrue(assert.actual < 0,
+		"Expected negative integer, but was <%d>.", assert.actual)
 }
 
 func (assert *IntAssert) IsGreaterThan(smallerOrEqual int) *IntAssert {
-	if assert.actual <= smallerOrEqual {
-		assert.logf("Expected integer greater than <%d>, but was <%d>.", smallerOrEqual, assert.actual)
-	}
-	return assert
+	return assert.isTrue(assert.actual > smallerOrEqual,
+		"Expected integer greater than <%d>, but was <%d>.", smallerOrEqual, assert.actual)
 }
 
 func (assert *IntAssert) IsGreaterOrEqualTo(smaller int) *IntAssert {
-	if assert.actual < smaller {
-		assert.logf("Expected integer greater or equal to <%d>, but was <%d>.", smaller, assert.actual)
-	}
-	return assert
+	return assert.isTrue(assert.actual >= smaller,
+		"Expected integer greater or equal to <%d>, but was <%d>.", smaller, assert.actual)
 }

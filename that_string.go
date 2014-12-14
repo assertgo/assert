@@ -9,13 +9,14 @@ type StringAssert struct {
 	actual string
 }
 
-func (assert *StringAssert) logf(format string, args ...interface{}) {
-	assert.t.Errorf(format, args...)
+func (assert *StringAssert) isTrue(condition bool, format string, args ...interface{}) *StringAssert {
+	if !condition {
+		assert.t.Errorf(format, args...)
+	}
+	return assert
 }
 
 func (assert *StringAssert) IsEqualTo(expected string) *StringAssert {
-	if assert.actual != expected {
-		assert.logf("Expected <%s>, but was <%s>.", expected, assert.actual)
-	}
-	return assert
+	return assert.isTrue(assert.actual == expected,
+		"Expected <%s>, but was <%s>.", expected, assert.actual)
 }
