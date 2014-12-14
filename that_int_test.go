@@ -72,6 +72,22 @@ func TestThatIntIsPositivePrintsMessage(t *testing.T) {
 		"Expected positive integer, but was <-10>.")
 }
 
+func TestThatIntIsNonpositivePrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsNonpositive()
+	ThatInt(mockT, -30).IsNonpositive()
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNonpositivePrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 1).IsNonpositive()
+	ThatInt(mockT, 30).IsNonpositive()
+	mockT.HasErrorMessages(
+		"Expected nonpositive integer, but was <1>.",
+		"Expected nonpositive integer, but was <30>.")
+}
+
 func TestThatIntIsNegativePrintsNothing(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, -1).IsNegative()
@@ -86,6 +102,22 @@ func TestThatIntIsNegativePrintsMessage(t *testing.T) {
 	mockT.HasErrorMessages(
 		"Expected negative integer, but was <0>.",
 		"Expected negative integer, but was <100>.")
+}
+
+func TestThatIntIsNonnegativePrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsNonnegative()
+	ThatInt(mockT, 300).IsNonnegative()
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNonnegativePrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, -1).IsNonnegative()
+	ThatInt(mockT, -300).IsNonnegative()
+	mockT.HasErrorMessages(
+		"Expected nonnegative integer, but was <-1>.",
+		"Expected nonnegative integer, but was <-300>.")
 }
 
 func TestThatIntIsGreaterThanPrintsNothing(t *testing.T) {

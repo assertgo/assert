@@ -41,9 +41,19 @@ func (assert *IntAssert) IsPositive() *IntAssert {
 		"Expected positive integer, but was <%d>.", assert.actual)
 }
 
+func (assert *IntAssert) IsNonpositive() *IntAssert {
+	return assert.isTrue(assert.actual <= 0,
+		"Expected nonpositive integer, but was <%d>.", assert.actual)
+}
+
 func (assert *IntAssert) IsNegative() *IntAssert {
 	return assert.isTrue(assert.actual < 0,
 		"Expected negative integer, but was <%d>.", assert.actual)
+}
+
+func (assert *IntAssert) IsNonnegative() *IntAssert {
+	return assert.isTrue(assert.actual >= 0,
+		"Expected nonnegative integer, but was <%d>.", assert.actual)
 }
 
 func (assert *IntAssert) IsGreaterThan(smallerOrEqual int) *IntAssert {
