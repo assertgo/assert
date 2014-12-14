@@ -33,3 +33,10 @@ func (assert *IntAssert) IsNegative() *IntAssert {
 	}
 	return assert
 }
+
+func (assert *IntAssert) IsGreaterThan(smallerOrEqual int) *IntAssert {
+	if assert.actual <= smallerOrEqual {
+		assert.t.Errorf("Expected integer greater than <%d>, but was <%d>.\n", smallerOrEqual, assert.actual)
+	}
+	return assert
+}

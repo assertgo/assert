@@ -65,3 +65,15 @@ func TestThatIntIsNegativePrintsMessage(t *testing.T) {
 	ThatInt(mockT, 100).IsNegative()
 	mockT.HasErrorMessage("Expected negative integer, but was <0>.\nExpected negative integer, but was <100>.\n")
 }
+
+func TestThatIntIsGreaterThanPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 4).IsGreaterThan(3).IsGreaterThan(-666)
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsGreaterThanPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 4).IsGreaterThan(4).IsGreaterThan(777)
+	mockT.HasErrorMessage("Expected integer greater than <4>, but was <4>.\nExpected integer greater than <777>, but was <4>.\n")
+}
