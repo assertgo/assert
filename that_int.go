@@ -6,13 +6,13 @@ func ThatInt(t TestingT, actual int) IntAssert {
 
 type IntAssert interface {
 	IsZero() IntAssert
-	IsNonzero() IntAssert
+	IsNonZero() IntAssert
 	IsEqualTo(int) IntAssert
 	IsNotEqualTo(int) IntAssert
 	IsPositive() IntAssert
-	IsNonpositive() IntAssert
+	IsNonPositive() IntAssert
 	IsNegative() IntAssert
-	IsNonnegative() IntAssert
+	IsNonNegative() IntAssert
 	IsGreaterThan(int) IntAssert
 	IsGreaterOrEqualTo(int) IntAssert
 	IsLessThan(int) IntAssert

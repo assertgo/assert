@@ -22,7 +22,7 @@ func (assert *intAssertImpl) IsZero() IntAssert {
 		"Expected zero, but was <%d>.", assert.actual)
 }
 
-func (assert *intAssertImpl) IsNonzero() IntAssert {
+func (assert *intAssertImpl) IsNonZero() IntAssert {
 	return assert.isTrue(assert.actual != 0,
 		"Expected nonzero, but was zero.")
 }
@@ -42,7 +42,7 @@ func (assert *intAssertImpl) IsPositive() IntAssert {
 		"Expected positive integer, but was <%d>.", assert.actual)
 }
 
-func (assert *intAssertImpl) IsNonpositive() IntAssert {
+func (assert *intAssertImpl) IsNonPositive() IntAssert {
 	return assert.isTrue(assert.actual <= 0,
 		"Expected nonpositive integer, but was <%d>.", assert.actual)
 }
@@ -52,7 +52,7 @@ func (assert *intAssertImpl) IsNegative() IntAssert {
 		"Expected negative integer, but was <%d>.", assert.actual)
 }
 
-func (assert *intAssertImpl) IsNonnegative() IntAssert {
+func (assert *intAssertImpl) IsNonNegative() IntAssert {
 	return assert.isTrue(assert.actual >= 0,
 		"Expected nonnegative integer, but was <%d>.", assert.actual)
 }
