@@ -31,9 +31,9 @@ func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
 		"Expected integer equal to <%d>, but was <%d>.", expected, assert.actual)
 }
 
-func (assert *IntAssert) IsNotEqualTo(expected int) *IntAssert {
-	return assert.isTrue(assert.actual != expected,
-		"Expected integer not equal to <%d>, but was equal.", expected)
+func (assert *IntAssert) IsNotEqualTo(nonexpected int) *IntAssert {
+	return assert.isTrue(assert.actual != nonexpected,
+		"Expected integer not equal to <%d>, but was equal.", nonexpected)
 }
 
 func (assert *IntAssert) IsPositive() *IntAssert {
@@ -56,14 +56,14 @@ func (assert *IntAssert) IsNonnegative() *IntAssert {
 		"Expected nonnegative integer, but was <%d>.", assert.actual)
 }
 
-func (assert *IntAssert) IsGreaterThan(smallerOrEqual int) *IntAssert {
-	return assert.isTrue(assert.actual > smallerOrEqual,
-		"Expected integer greater than <%d>, but was <%d>.", smallerOrEqual, assert.actual)
+func (assert *IntAssert) IsGreaterThan(lesserOrEqual int) *IntAssert {
+	return assert.isTrue(assert.actual > lesserOrEqual,
+		"Expected integer greater than <%d>, but was <%d>.", lesserOrEqual, assert.actual)
 }
 
-func (assert *IntAssert) IsGreaterOrEqualTo(smaller int) *IntAssert {
-	return assert.isTrue(assert.actual >= smaller,
-		"Expected integer greater or equal to <%d>, but was <%d>.", smaller, assert.actual)
+func (assert *IntAssert) IsGreaterOrEqualTo(lesser int) *IntAssert {
+	return assert.isTrue(assert.actual >= lesser,
+		"Expected integer greater or equal to <%d>, but was <%d>.", lesser, assert.actual)
 }
 
 func (assert *IntAssert) IsLessThan(greaterOrEqual int) *IntAssert {
