@@ -1,5 +1,10 @@
 package assert
 
+import (
+	"strconv"
+	"strings"
+)
+
 func ThatInt(t TestingT, actual int) *IntAssert {
 	return &IntAssert{t, actual}
 }
@@ -84,4 +89,26 @@ func (assert *IntAssert) IsBetween(lesserOrEqual, greaterOrEqual int) *IntAssert
 func (assert *IntAssert) IsNotBetween(nonlesser, nongreater int) *IntAssert {
 	return assert.isTrue(assert.actual < nonlesser || assert.actual > nongreater,
 		"Expected integer not to be between <%d, %d>, but was <%d>.", nonlesser, nongreater, assert.actual)
+}
+
+func (assert *IntAssert) IsIn(expected ...int) *IntAssert {
+	return assert.isTrue(assert.isIn(expected...),
+		"Expected integer to be in (%s), but was <%d>.", strings.Join(strSlice(expected...), ", "), assert.actual)
+}
+
+func (assert *IntAssert) isIn(expected ...int) bool {
+	for _, v := range expected {
+		if assert.actual == v {
+			return true
+		}
+	}
+	return false
+}
+
+func strSlice(values ...int) []string {
+	ret := make([]string, len(values))
+	for i, v := range values {
+		ret[i] = strconv.Itoa(v)
+	}
+	return ret
 }
