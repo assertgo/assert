@@ -43,6 +43,19 @@ func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 		"Expected integer equal to <2>, but was <1>.")
 }
 
+func TestThatIntIsNotEqualToPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 5).IsNotEqualTo(4).IsNotEqualTo(6)
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNotEqualToPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, -5).IsNotEqualTo(-5)
+	mockT.HasErrorMessages(
+		"Expected integer not equal to <-5>, but was equal.")
+}
+
 func TestThatIntIsPositivePrintsNothing(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 1).IsPositive()

@@ -31,6 +31,11 @@ func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
 		"Expected integer equal to <%d>, but was <%d>.", expected, assert.actual)
 }
 
+func (assert *IntAssert) IsNotEqualTo(expected int) *IntAssert {
+	return assert.isTrue(assert.actual != expected,
+		"Expected integer not equal to <%d>, but was equal.", expected)
+}
+
 func (assert *IntAssert) IsPositive() *IntAssert {
 	return assert.isTrue(assert.actual > 0,
 		"Expected positive integer, but was <%d>.", assert.actual)
