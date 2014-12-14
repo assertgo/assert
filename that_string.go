@@ -6,4 +6,5 @@ func ThatString(t TestingT, actual string) StringAssert {
 
 type StringAssert interface {
 	IsEqualTo(expected string) StringAssert
+	IsNotEqualTo(expected string) StringAssert
 }
