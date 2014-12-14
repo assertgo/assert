@@ -17,12 +17,13 @@ func (assert *IntAssert) isTrue(condition bool, format string, args ...interface
 }
 
 func (assert *IntAssert) IsZero() *IntAssert {
-	return assert.IsEqualTo(0)
+	return assert.isTrue(assert.actual == 0,
+		"Expected zero, but was <%d>.", assert.actual)
 }
 
 func (assert *IntAssert) IsEqualTo(expected int) *IntAssert {
 	return assert.isTrue(assert.actual == expected,
-		"Expected <%d>, but was <%d>.", expected, assert.actual)
+		"Expected integer equal to <%d>, but was <%d>.", expected, assert.actual)
 }
 
 func (assert *IntAssert) IsPositive() *IntAssert {

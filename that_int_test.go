@@ -4,34 +4,20 @@ import "testing"
 
 func TestThatIntIsZeroPrintsNothing(t *testing.T) {
 	mockT := newMockT(t)
-	ThatInt(mockT, 0).IsZero()
+	ThatInt(mockT, 0).IsZero().IsZero()
 	mockT.HasNoErrors()
-}
-
-func TestThatIntChainedPrintsNothing(t *testing.T) {
-	mockT := newMockT(t)
-	ThatInt(mockT, 0).IsZero().IsEqualTo(0)
-	mockT.HasNoErrors()
-}
-
-func TestThatIntChainedPrintsAllMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatInt(mockT, 2).IsZero().IsEqualTo(1)
-	mockT.HasErrorMessages(
-		"Expected <0>, but was <2>.",
-		"Expected <1>, but was <2>.")
 }
 
 func TestThatIntIsZeroPrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 6).IsZero()
 	mockT.HasErrorMessages(
-		"Expected <0>, but was <6>.")
+		"Expected zero, but was <6>.")
 }
 
 func TestThatIntIsEqualToPrintsNothing(t *testing.T) {
 	mockT := newMockT(t)
-	ThatInt(mockT, 1).IsEqualTo(1)
+	ThatInt(mockT, 1).IsEqualTo(1).IsEqualTo(1)
 	mockT.HasNoErrors()
 }
 
@@ -39,7 +25,7 @@ func TestThatIntIsEqualToPrintsMessage(t *testing.T) {
 	mockT := newMockT(t)
 	ThatInt(mockT, 1).IsEqualTo(2)
 	mockT.HasErrorMessages(
-		"Expected <2>, but was <1>.")
+		"Expected integer equal to <2>, but was <1>.")
 }
 
 func TestThatIntIsPositivePrintsNothing(t *testing.T) {
