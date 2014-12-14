@@ -75,3 +75,8 @@ func (assert *IntAssert) IsLessOrEqualTo(greaterOrEqual int) *IntAssert {
 	return assert.isTrue(assert.actual <= greaterOrEqual,
 		"Expected integer lesser or equal to <%d>, but was <%d>.", greaterOrEqual, assert.actual)
 }
+
+func (assert *IntAssert) IsBetween(lesserOrEqual, greaterOrEqual int) *IntAssert {
+	return assert.isTrue(lesserOrEqual <= assert.actual && assert.actual <= greaterOrEqual,
+		"Expected integer to be between <%d, %d>, but was <%d>.", lesserOrEqual, greaterOrEqual, assert.actual)
+}

@@ -175,3 +175,17 @@ func TestThatIntIsLessOrEqualToPrintsMessage(t *testing.T) {
 		"Expected integer lesser or equal to <-7>, but was <-6>.",
 		"Expected integer lesser or equal to <-128>, but was <-6>.")
 }
+
+func TestThatIntIsBetweenPrintsNothing(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsBetween(-42, 0).IsBetween(-5, 5).IsBetween(0, 42)
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsBetweenPrintsMessage(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsBetween(-42, -1).IsBetween(1, 42)
+	mockT.HasErrorMessages(
+		"Expected integer to be between <-42, -1>, but was <0>.",
+		"Expected integer to be between <1, 42>, but was <0>.")
+}
