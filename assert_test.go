@@ -7,5 +7,6 @@ func TestCanCreateAssert(t *testing.T) {
 	assert := Setup(mockT)
 	assert.ThatInt(0).IsZero()
 	assert.ThatString("").IsEmpty()
+	assert.ThatBool(false).IsFalse()
 	mockT.HasNoErrors()
 }

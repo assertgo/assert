@@ -1,7 +1,10 @@
 package assert
 
+func ThatBool(t TestingT, actual bool) BoolAssert {
+	return &boolAssertImpl{t, actual}
+}
+
 type BoolAssert interface {
-	// TODO
-	// IsFalse() BoolAssert
-	// IsTrue() BoolAssert
+	IsFalse() BoolAssert
+	IsTrue() BoolAssert
 }
