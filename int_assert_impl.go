@@ -32,9 +32,9 @@ func (assert *intAssertImpl) IsEqualTo(expected int) IntAssert {
 		"Expected integer equal to <%d>, but was <%d>.", expected, assert.actual)
 }
 
-func (assert *intAssertImpl) IsNotEqualTo(nonexpected int) IntAssert {
-	return assert.isTrue(assert.actual != nonexpected,
-		"Expected integer not equal to <%d>, but was equal.", nonexpected)
+func (assert *intAssertImpl) IsNotEqualTo(unexpected int) IntAssert {
+	return assert.isTrue(assert.actual != unexpected,
+		"Expected integer not equal to <%d>, but was equal.", unexpected)
 }
 
 func (assert *intAssertImpl) IsPositive() IntAssert {
@@ -57,14 +57,14 @@ func (assert *intAssertImpl) IsNonNegative() IntAssert {
 		"Expected nonnegative integer, but was <%d>.", assert.actual)
 }
 
-func (assert *intAssertImpl) IsGreaterThan(lesser int) IntAssert {
-	return assert.isTrue(assert.actual > lesser,
-		"Expected integer greater than <%d>, but was <%d>.", lesser, assert.actual)
+func (assert *intAssertImpl) IsGreaterThan(less int) IntAssert {
+	return assert.isTrue(assert.actual > less,
+		"Expected integer greater than <%d>, but was <%d>.", less, assert.actual)
 }
 
-func (assert *intAssertImpl) IsGreaterOrEqualTo(lesserOrEqual int) IntAssert {
-	return assert.isTrue(assert.actual >= lesserOrEqual,
-		"Expected integer greater or equal to <%d>, but was <%d>.", lesserOrEqual, assert.actual)
+func (assert *intAssertImpl) IsGreaterOrEqualTo(lessOrEqual int) IntAssert {
+	return assert.isTrue(assert.actual >= lessOrEqual,
+		"Expected integer greater or equal to <%d>, but was <%d>.", lessOrEqual, assert.actual)
 }
 
 func (assert *intAssertImpl) IsLessThan(greater int) IntAssert {
@@ -77,29 +77,29 @@ func (assert *intAssertImpl) IsLessOrEqualTo(greaterOrEqual int) IntAssert {
 		"Expected integer lesser or equal to <%d>, but was <%d>.", greaterOrEqual, assert.actual)
 }
 
-func (assert *intAssertImpl) IsBetween(lesserOrEqual, greaterOrEqual int) IntAssert {
-	return assert.isTrue(lesserOrEqual <= assert.actual && assert.actual <= greaterOrEqual,
-		"Expected integer to be between <%d, %d>, but was <%d>.", lesserOrEqual, greaterOrEqual, assert.actual)
+func (assert *intAssertImpl) IsBetween(lowerBound, upperBound int) IntAssert {
+	return assert.isTrue(lowerBound <= assert.actual && assert.actual <= upperBound,
+		"Expected integer to be between <%d, %d>, but was <%d>.", lowerBound, upperBound, assert.actual)
 }
 
-func (assert *intAssertImpl) IsNotBetween(nonlesser, nongreater int) IntAssert {
-	return assert.isTrue(assert.actual < nonlesser || assert.actual > nongreater,
-		"Expected integer not to be between <%d, %d>, but was <%d>.", nonlesser, nongreater, assert.actual)
+func (assert *intAssertImpl) IsNotBetween(lowerBound, upperBound int) IntAssert {
+	return assert.isTrue(assert.actual < lowerBound || assert.actual > upperBound,
+		"Expected integer not to be between <%d, %d>, but was <%d>.", lowerBound, upperBound, assert.actual)
 }
 
-func (assert *intAssertImpl) IsIn(expected ...int) IntAssert {
-	return assert.isTrue(assert.isIn(expected...),
-		"Expected integer to be in (%s), but was <%d>.", strings.Join(strSlice(expected...), ", "), assert.actual)
+func (assert *intAssertImpl) IsIn(elements ...int) IntAssert {
+	return assert.isTrue(assert.isIn(elements...),
+		"Expected integer to be in (%s), but was <%d>.", strings.Join(strSlice(elements...), ", "), assert.actual)
 }
 
-func (assert *intAssertImpl) IsNotIn(expected ...int) IntAssert {
-	return assert.isTrue(!assert.isIn(expected...),
-		"Expected integer not to be in (%s), but was <%d>.", strings.Join(strSlice(expected...), ", "), assert.actual)
+func (assert *intAssertImpl) IsNotIn(elements ...int) IntAssert {
+	return assert.isTrue(!assert.isIn(elements...),
+		"Expected integer not to be in (%s), but was <%d>.", strings.Join(strSlice(elements...), ", "), assert.actual)
 }
 
-func (assert *intAssertImpl) isIn(expected ...int) bool {
-	for _, v := range expected {
-		if assert.actual == v {
+func (assert *intAssertImpl) isIn(elements ...int) bool {
+	for _, e := range elements {
+		if assert.actual == e {
 			return true
 		}
 	}

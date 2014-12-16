@@ -7,20 +7,20 @@ func ThatInt(t TestingT, actual int) IntAssert {
 type IntAssert interface {
 	IsZero() IntAssert
 	IsNonZero() IntAssert
-	IsEqualTo(int) IntAssert
-	IsNotEqualTo(int) IntAssert
+	IsEqualTo(expected int) IntAssert
+	IsNotEqualTo(unexpected int) IntAssert
 	IsPositive() IntAssert
 	IsNonPositive() IntAssert
 	IsNegative() IntAssert
 	IsNonNegative() IntAssert
-	IsGreaterThan(int) IntAssert
-	IsGreaterOrEqualTo(int) IntAssert
-	IsLessThan(int) IntAssert
-	IsLessOrEqualTo(int) IntAssert
-	IsBetween(int, int) IntAssert
-	IsNotBetween(int, int) IntAssert
-	IsIn(...int) IntAssert
-	IsNotIn(...int) IntAssert
+	IsGreaterThan(less int) IntAssert
+	IsGreaterOrEqualTo(lessOrEqual int) IntAssert
+	IsLessThan(greater int) IntAssert
+	IsLessOrEqualTo(greaterOrEqual int) IntAssert
+	IsBetween(lowerBound, upperBound int) IntAssert
+	IsNotBetween(lowerBound, upperBound int) IntAssert
+	IsIn(elements ...int) IntAssert
+	IsNotIn(elements ...int) IntAssert
 	// TODO
 	// IsEven() IntAssert
 	// IsOdd() IntAssert
