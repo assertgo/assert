@@ -21,10 +21,10 @@ type IntAssert interface {
 	IsNotBetween(lowerBound, upperBound int) IntAssert
 	IsIn(elements ...int) IntAssert
 	IsNotIn(elements ...int) IntAssert
+	IsEven() IntAssert
+	IsOdd() IntAssert
+	IsDivisibleBy(divisor int) IntAssert
+	IsNotDivisibleBy(divisor int) IntAssert
 	// TODO
-	// IsEven() IntAssert
-	// IsOdd() IntAssert
 	// IsPrime() IntAssert
-	// IsDivisibleBy(divisor int) IntAssert
-	// IsNotDivisibleBy(divisor int) IntAssert
 }

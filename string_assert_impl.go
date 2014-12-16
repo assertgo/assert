@@ -1,5 +1,7 @@
 package assert
 
+import "strings"
+
 type stringAssertImpl struct {
 	t      TestingT
 	actual string
@@ -28,6 +30,11 @@ func (assert *stringAssertImpl) IsEmpty() StringAssert {
 func (assert *stringAssertImpl) IsInSlice(expectedSlice []string) StringAssert {
 	return assert.isTrue(stringIsInSlice(expectedSlice, assert.actual),
 		"Expected string to be in slice <%v>, but wasn't.", expectedSlice)
+}
+
+func (assert *stringAssertImpl) Contains(substring string) StringAssert {
+	return assert.isTrue(strings.Contains(assert.actual, substring),
+		"Expected string to contain <%s>, but didn't.", substring)
 }
 
 func stringIsInSlice(slice []string, expectedString string) bool {

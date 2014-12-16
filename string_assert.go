@@ -9,7 +9,7 @@ type StringAssert interface {
 	IsNotEqualTo(unexpected string) StringAssert
 	IsEmpty() StringAssert
 	IsInSlice(expectedSlice []string) StringAssert
+	Contains(substring string) StringAssert
 	// TODO
-	// Contains(substring string) StringAssert
 	// Matches(pattern string) StringAssert
 }
