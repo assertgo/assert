@@ -2,13 +2,13 @@ package assert
 
 import "testing"
 
-func TestThatStringIsEqualToPrintsNothing(t *testing.T) {
+func TestThatStringIsEqualToHasNoErrors(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Alice").IsEqualTo("Alice").IsEqualTo("Alice")
 	mockT.HasNoErrors()
 }
 
-func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
+func TestThatStringIsEqualToHasErrorMessages(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Alice").IsEqualTo("Bob").IsEqualTo("Charlie")
 	mockT.HasErrorMessages(
@@ -17,13 +17,13 @@ func TestThatStringIsEqualToPrintsMessage(t *testing.T) {
 	)
 }
 
-func TestThatStringIsNotEqualToPrintsNothing(t *testing.T) {
+func TestThatStringIsNotEqualToHasNoErrors(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Alice").IsNotEqualTo("Bob").IsNotEqualTo("Bob")
 	mockT.HasNoErrors()
 }
 
-func TestThatStringIsNotEqualToPrintsMessage(t *testing.T) {
+func TestThatStringIsNotEqualToHasErrorMessages(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Alice").IsNotEqualTo("Alice")
 	mockT.HasErrorMessages(
@@ -31,13 +31,13 @@ func TestThatStringIsNotEqualToPrintsMessage(t *testing.T) {
 	)
 }
 
-func TestThatStringIsEmptyPrintsNothing(t *testing.T) {
+func TestThatStringIsEmptyHasNoErrors(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "").IsEmpty()
 	mockT.HasNoErrors()
 }
 
-func TestThatStringIsEmptyPrintsMessage(t *testing.T) {
+func TestThatStringIsEmptyHasErrorMessages(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").IsEmpty()
 	mockT.HasErrorMessages(
@@ -45,13 +45,13 @@ func TestThatStringIsEmptyPrintsMessage(t *testing.T) {
 	)
 }
 
-func TestThatStringIsInSlicePrintsNothing(t *testing.T) {
+func TestThatStringIsInSliceHasNoErrors(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").IsInSlice([]string{"Marta"})
 	mockT.HasNoErrors()
 }
 
-func TestThatStringIsInSlicePrintsMessage(t *testing.T) {
+func TestThatStringIsInSliceHasErrorMessages(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").IsInSlice([]string{"Michal", "Macy"})
 	mockT.HasErrorMessages(
@@ -59,13 +59,13 @@ func TestThatStringIsInSlicePrintsMessage(t *testing.T) {
 	)
 }
 
-func TestThatStringContainsPrintsNothing(t *testing.T) {
+func TestThatStringContainsHasNoErrors(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").Contains("art")
 	mockT.HasNoErrors()
 }
 
-func TestThatStringContainsPrintsMessage(t *testing.T) {
+func TestThatStringContainsHasErrorMessages(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").Contains("Michal")
 	mockT.HasErrorMessages(
