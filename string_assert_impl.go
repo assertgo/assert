@@ -6,9 +6,7 @@ type stringAssertImpl struct {
 }
 
 func (assert *stringAssertImpl) isTrue(condition bool, format string, args ...interface{}) *stringAssertImpl {
-	if !condition {
-		assert.t.Errorf(format, args...)
-	}
+	logIfFalse(assert.t, condition, format, args...)
 	return assert
 }
 

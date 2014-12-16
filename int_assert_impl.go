@@ -11,9 +11,7 @@ type intAssertImpl struct {
 }
 
 func (assert *intAssertImpl) isTrue(condition bool, format string, args ...interface{}) *intAssertImpl {
-	if !condition {
-		assert.t.Errorf(format, args...)
-	}
+	logIfFalse(assert.t, condition, format, args...)
 	return assert
 }
 
