@@ -21,4 +21,8 @@ type IntAssert interface {
 	IsNotBetween(int, int) IntAssert
 	IsIn(...int) IntAssert
 	IsNotIn(...int) IntAssert
+	// TODO
+	// IsEven() IntAssert
+	// IsOdd() IntAssert
+	// IsPrime() IntAssert
 }
