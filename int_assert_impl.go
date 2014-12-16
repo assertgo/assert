@@ -95,6 +95,26 @@ func (assert *intAssertImpl) IsNotIn(elements ...int) IntAssert {
 		"Expected integer not to be in (%s), but was <%d>.", strings.Join(strSlice(elements...), ", "), assert.actual)
 }
 
+func (assert *intAssertImpl) IsEven() IntAssert {
+	return assert.isTrue(assert.actual%2 == 0,
+		"Expected integer to be even, but was <%d>.", assert.actual)
+}
+
+func (assert *intAssertImpl) IsOdd() IntAssert {
+	return assert.isTrue(assert.actual%2 != 0,
+		"Expected integer to be odd, but was <%d>.", assert.actual)
+}
+
+func (assert *intAssertImpl) IsDivisibleBy(divisor int) IntAssert {
+	return assert.isTrue(assert.actual%divisor == 0,
+		"Expected integer to be divisible by <%d>, but was <%d>.", divisor, assert.actual)
+}
+
+func (assert *intAssertImpl) IsNotDivisibleBy(divisor int) IntAssert {
+	return assert.isTrue(assert.actual%divisor != 0,
+		"Expected integer not to be divisible by <%d>, but was <%d>.", divisor, assert.actual)
+}
+
 func (assert *intAssertImpl) isIn(elements ...int) bool {
 	for _, e := range elements {
 		if assert.actual == e {
