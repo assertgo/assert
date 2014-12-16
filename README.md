@@ -9,7 +9,7 @@ The coolest assertion library for go language!
 func TestPerfectNumber(t *testing.T) {
 	assert := assert.Setup(t)
 	num := ComputePerfectNumber()
-	assert.That(num).
+	assert.ThatInt(num).
 		IsEqualTo(6).
 		IsNonZero().
 		IsPositive().
