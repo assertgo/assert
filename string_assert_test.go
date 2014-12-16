@@ -59,7 +59,7 @@ func TestThatStringIsInSlicePrintsMessage(t *testing.T) {
 	)
 }
 
-func TestThatStringContainsePrintsNothing(t *testing.T) {
+func TestThatStringContainsPrintsNothing(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").Contains("art")
 	mockT.HasNoErrors()
