@@ -136,10 +136,3 @@ func strSlice(values ...int) []string {
 	}
 	return ret
 }
-
-func isPrime(value int) bool {
-	if value < 2 {
-		return false
-	}
-	return value < 3
-}
