@@ -115,6 +115,11 @@ func (assert *intAssertImpl) IsNotDivisibleBy(divisor int) IntAssert {
 		"Expected integer not to be divisible by <%d>, but was <%d>.", divisor, assert.actual)
 }
 
+func (assert *intAssertImpl) IsPrime() IntAssert {
+	return assert.isTrue(isPrime(assert.actual),
+		"Expected integer to be prime, but was <%d>.", assert.actual)
+}
+
 func (assert *intAssertImpl) isIn(elements ...int) bool {
 	for _, e := range elements {
 		if assert.actual == e {
@@ -130,4 +135,11 @@ func strSlice(values ...int) []string {
 		ret[i] = strconv.Itoa(v)
 	}
 	return ret
+}
+
+func isPrime(value int) bool {
+	if value < 2 {
+		return false
+	}
+	return value < 3
 }

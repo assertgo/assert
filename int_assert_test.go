@@ -311,3 +311,19 @@ func TestThatIntIsNotDivisibleByHasErrorMessages(t *testing.T) {
 		"Expected integer not to be divisible by <3>, but was <6>.",
 	)
 }
+
+func TestThatIntIsPrimeHasNoErrors(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 2).IsPrime().IsPrime()
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsPrimeHasErrorMessages(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 1).IsPrime()
+	ThatInt(mockT, 4).IsPrime()
+	mockT.HasErrorMessages(
+		"Expected integer to be prime, but was <1>.",
+		"Expected integer to be prime, but was <4>.",
+	)
+}
