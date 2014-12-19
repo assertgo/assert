@@ -14,7 +14,9 @@ type StringAssert interface {
 	IsNotEmpty() StringAssert
 	DoesNotContain(substring string) StringAssert
 	IsLowerCase() StringAssert
+	IsNotLowerCase() StringAssert
 	IsUpperCase() StringAssert
+	IsNotUpperCase() StringAssert
 	// TODO
 	// Matches(pattern string) StringAssert
 	// IsIn(elements ...string) StringAssert
