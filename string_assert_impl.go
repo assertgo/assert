@@ -45,7 +45,12 @@ func (assert *stringAssertImpl) IsNotInSlice(expectedSlice []string) StringAsser
 
 func (assert *stringAssertImpl) Contains(substring string) StringAssert {
 	return assert.isTrue(strings.Contains(assert.actual, substring),
-		"Expected string to contain <%s>, but didn't.", substring)
+		"Expected string <%s> to contain <%s>, but didn't.", assert.actual, substring)
+}
+
+func (assert *stringAssertImpl) DoesNotContain(substring string) StringAssert {
+	return assert.isTrue(!strings.Contains(assert.actual, substring),
+		"Expected string <%s> to not contain <%s>, but it did.", assert.actual, substring)
 }
 
 func stringIsInSlice(slice []string, expectedString string) bool {

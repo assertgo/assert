@@ -97,6 +97,20 @@ func TestThatStringContainsHasErrorMessages(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").Contains("Michal")
 	mockT.HasErrorMessages(
-		"Expected string to contain <Michal>, but didn't.",
+		"Expected string <Marta> to contain <Michal>, but didn't.",
+	)
+}
+
+func TestThatStringDoesNotContainHasNoErrors(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").DoesNotContain("Michal")
+	mockT.HasNoErrors()
+}
+
+func TestThatStringDoesNotContainHasErrorMessages(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").DoesNotContain("art")
+	mockT.HasErrorMessages(
+		"Expected string <Marta> to not contain <art>, but it did.",
 	)
 }

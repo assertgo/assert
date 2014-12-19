@@ -12,9 +12,9 @@ type StringAssert interface {
 	Contains(substring string) StringAssert
 	IsNotInSlice(elements []string) StringAssert
 	IsNotEmpty() StringAssert
+	DoesNotContain(substring string) StringAssert
 	// TODO
 	// Matches(pattern string) StringAssert
-	// DoesNotContain(substring string) StringAssert
 	// IsIn(elements ...string) StringAssert
 	// IsNotIn(elements ...string) StringAssert
 	// HasPrefix(prefix string) StringAssert
