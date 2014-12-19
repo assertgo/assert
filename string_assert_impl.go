@@ -53,6 +53,11 @@ func (assert *stringAssertImpl) DoesNotContain(substring string) StringAssert {
 		"Expected string <%s> to not contain <%s>, but it did.", assert.actual, substring)
 }
 
+func (assert *stringAssertImpl) IsLowerCase() StringAssert {
+	return assert.isTrue(strings.ToLower(assert.actual) == assert.actual,
+		"Expected string <%s> to be lower case, but wasn't.", assert.actual)
+}
+
 func stringIsInSlice(slice []string, expectedString string) bool {
 	for _, v := range slice {
 		if v == expectedString {

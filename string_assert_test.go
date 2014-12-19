@@ -114,3 +114,17 @@ func TestThatStringDoesNotContainHasErrorMessages(t *testing.T) {
 		"Expected string <Marta> to not contain <art>, but it did.",
 	)
 }
+
+func TestThatStringIsLowerCaseHasNoErrors(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "marta").IsLowerCase()
+	mockT.HasNoErrors()
+}
+
+func TestThatStringIsLowerCaseHasErrorMessages(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").IsLowerCase()
+	mockT.HasErrorMessages(
+		"Expected string <Marta> to be lower case, but wasn't.",
+	)
+}
