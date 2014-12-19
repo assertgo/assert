@@ -128,3 +128,17 @@ func TestThatStringIsLowerCaseHasErrorMessages(t *testing.T) {
 		"Expected string <Marta> to be lower case, but wasn't.",
 	)
 }
+
+func TestThatStringIsUpperCaseHasNoErrors(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "MARTA").IsUpperCase()
+	mockT.HasNoErrors()
+}
+
+func TestThatStringIsUpperCaseHasErrorMessages(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "MArTa").IsUpperCase()
+	mockT.HasErrorMessages(
+		"Expected string <MArTa> to be upper case, but wasn't.",
+	)
+}

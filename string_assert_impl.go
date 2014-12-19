@@ -58,6 +58,11 @@ func (assert *stringAssertImpl) IsLowerCase() StringAssert {
 		"Expected string <%s> to be lower case, but wasn't.", assert.actual)
 }
 
+func (assert *stringAssertImpl) IsUpperCase() StringAssert {
+	return assert.isTrue(strings.ToUpper(assert.actual) == assert.actual,
+		"Expected string <%s> to be upper case, but wasn't.", assert.actual)
+}
+
 func stringIsInSlice(slice []string, expectedString string) bool {
 	for _, v := range slice {
 		if v == expectedString {
