@@ -32,6 +32,11 @@ func (assert *stringAssertImpl) IsInSlice(expectedSlice []string) StringAssert {
 		"Expected string to be in slice <%v>, but wasn't.", expectedSlice)
 }
 
+func (assert *stringAssertImpl) IsNotInSlice(expectedSlice []string) StringAssert {
+	return assert.isTrue(!stringIsInSlice(expectedSlice, assert.actual),
+		"Expected string to not be in slice <%v>, but was.", expectedSlice)
+}
+
 func (assert *stringAssertImpl) Contains(substring string) StringAssert {
 	return assert.isTrue(strings.Contains(assert.actual, substring),
 		"Expected string to contain <%s>, but didn't.", substring)

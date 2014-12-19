@@ -59,6 +59,20 @@ func TestThatStringIsInSliceHasErrorMessages(t *testing.T) {
 	)
 }
 
+func TestThatStringIsNotInSliceHasNoErrors(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").IsNotInSlice([]string{"Michal"})
+	mockT.HasNoErrors()
+}
+
+func TestThatStringIsNotInSliceHasErrorMessages(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").IsNotInSlice([]string{"Marta"})
+	mockT.HasErrorMessages(
+		"Expected string to not be in slice <[Marta]>, but was.",
+	)
+}
+
 func TestThatStringContainsHasNoErrors(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").Contains("art")

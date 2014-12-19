@@ -10,11 +10,11 @@ type StringAssert interface {
 	IsEmpty() StringAssert
 	IsInSlice(expectedSlice []string) StringAssert
 	Contains(substring string) StringAssert
+	IsNotInSlice(elements []string) StringAssert
 	// TODO
 	// Matches(pattern string) StringAssert
 	// IsNotEmpty() StringAssert
 	// DoesNotContain(substring string) StringAssert
-	// IsNotInSlice(elements []string) StringAssert
 	// IsIn(elements ...string) StringAssert
 	// IsNotIn(elements ...string) StringAssert
 	// HasPrefix(prefix string) StringAssert
