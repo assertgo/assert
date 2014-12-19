@@ -45,6 +45,20 @@ func TestThatStringIsEmptyHasErrorMessages(t *testing.T) {
 	)
 }
 
+func TestThatStringIsNotEmptyHasNoErrors(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "Marta").IsNotEmpty()
+	mockT.HasNoErrors()
+}
+
+func TestThatStringIsNotEmptyHasErrorMessages(t *testing.T) {
+	mockT := newMockT(t)
+	ThatString(mockT, "").IsNotEmpty()
+	mockT.HasErrorMessages(
+		"Expected string to not be empty, but was.",
+	)
+}
+
 func TestThatStringIsInSliceHasNoErrors(t *testing.T) {
 	mockT := newMockT(t)
 	ThatString(mockT, "Marta").IsInSlice([]string{"Marta"})

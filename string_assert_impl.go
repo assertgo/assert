@@ -27,6 +27,12 @@ func (assert *stringAssertImpl) IsEmpty() StringAssert {
 		"Expected string to be empty, but was <%s>.", assert.actual)
 }
 
+func (assert *stringAssertImpl) IsNotEmpty() StringAssert {
+	return assert.isTrue(assert.actual != "",
+		"Expected string to not be empty, but was.",
+	)
+}
+
 func (assert *stringAssertImpl) IsInSlice(expectedSlice []string) StringAssert {
 	return assert.isTrue(stringIsInSlice(expectedSlice, assert.actual),
 		"Expected string to be in slice <%v>, but wasn't.", expectedSlice)
