@@ -120,6 +120,11 @@ func (assert *intAssertImpl) IsPrime() IntAssert {
 		"Expected integer to be prime, but was <%d>.", assert.actual)
 }
 
+func (assert *intAssertImpl) IsAnswerToTheUltimateQuestionOfLife() IntAssert {
+	return assert.isTrue(assert.actual == 42,
+		"Expected answer to the ultimate question of life, but was <%d>.", assert.actual)
+}
+
 func (assert *intAssertImpl) isIn(elements ...int) bool {
 	for _, e := range elements {
 		if assert.actual == e {

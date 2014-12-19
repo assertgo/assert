@@ -327,3 +327,19 @@ func TestThatIntIsPrimeHasErrorMessages(t *testing.T) {
 		"Expected integer to be prime, but was <4>.",
 	)
 }
+
+func TestThatIntIsAnswerToTheUltimateQuestionOfLifeHasNoErrors(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 42).IsAnswerToTheUltimateQuestionOfLife().IsAnswerToTheUltimateQuestionOfLife()
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsAnswerToTheUltimateQuestionOfLifeHasErrorMessages(t *testing.T) {
+	mockT := newMockT(t)
+	ThatInt(mockT, 0).IsAnswerToTheUltimateQuestionOfLife()
+	ThatInt(mockT, 44).IsAnswerToTheUltimateQuestionOfLife()
+	mockT.HasErrorMessages(
+		"Expected answer to the ultimate question of life, but was <0>.",
+		"Expected answer to the ultimate question of life, but was <44>.",
+	)
+}
