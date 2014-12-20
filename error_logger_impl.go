@@ -15,9 +15,7 @@ type errorLogger interface {
 	Log(location *location, message string)
 }
 
-func newLogger() errorLogger {
-	return &errorLoggerImpl{os.Stderr}
-}
+var theLogger errorLogger = &errorLoggerImpl{os.Stderr}
 
 type errorLoggerImpl struct {
 	writer io.Writer

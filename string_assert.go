@@ -1,7 +1,7 @@
 package assert
 
 func ThatString(t TestingT, actual string) StringAssert {
-	return &stringAssertImpl{t, newLogger(), actual}
+	return &stringAssertImpl{t, theLogger, actual}
 }
 
 type StringAssert interface {

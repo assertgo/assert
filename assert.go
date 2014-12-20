@@ -1,7 +1,7 @@
 package assert
 
 func Setup(t TestingT) AssertProvider {
-	return setupImpl(t, newLogger())
+	return setupImpl(t, theLogger)
 }
 
 type AssertProvider interface {
