@@ -1,7 +1,9 @@
 package assert
 
+import "os"
+
 func ThatString(t TestingT, actual string) StringAssert {
-	return &stringAssertImpl{t, actual}
+	return &stringAssertImpl{t, &errorLoggerImpl{os.Stderr}, actual}
 }
 
 type StringAssert interface {

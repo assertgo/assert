@@ -4,6 +4,7 @@ import "strings"
 
 type stringAssertImpl struct {
 	t      TestingT
+	logger errorLogger
 	actual string
 }
 

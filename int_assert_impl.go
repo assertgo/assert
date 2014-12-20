@@ -7,6 +7,7 @@ import (
 
 type intAssertImpl struct {
 	t      TestingT
+	logger errorLogger
 	actual int
 }
 

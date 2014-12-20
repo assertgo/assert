@@ -1,17 +1,18 @@
 package assert
 
 type assertProviderImpl struct {
-	t TestingT
+	t      TestingT
+	logger errorLogger
 }
 
 func (assertProvider *assertProviderImpl) ThatInt(actual int) IntAssert {
-	return &intAssertImpl{assertProvider.t, actual}
+	return &intAssertImpl{assertProvider.t, assertProvider.logger, actual}
 }
 
 func (assertProvider *assertProviderImpl) ThatString(actual string) StringAssert {
-	return &stringAssertImpl{assertProvider.t, actual}
+	return &stringAssertImpl{assertProvider.t, assertProvider.logger, actual}
 }
 
 func (assertProvider *assertProviderImpl) ThatBool(actual bool) BoolAssert {
-	return &boolAssertImpl{assertProvider.t, actual}
+	return &boolAssertImpl{assertProvider.t, assertProvider.logger, actual}
 }

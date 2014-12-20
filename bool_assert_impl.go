@@ -2,6 +2,7 @@ package assert
 
 type boolAssertImpl struct {
 	t      TestingT
+	logger errorLogger
 	actual bool
 }
 

@@ -1,7 +1,11 @@
 package assert
 
+import (
+	"os"
+)
+
 func Setup(t TestingT) AssertProvider {
-	return &assertProviderImpl{t}
+	return &assertProviderImpl{t, &errorLoggerImpl{os.Stderr}}
 }
 
 type AssertProvider interface {
