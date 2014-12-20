@@ -41,3 +41,13 @@ func TestThatBigNumbersAreNotPrime(t *testing.T) {
 	assert.ThatBool(isPrime(5251)).IsFalse()
 	assert.ThatBool(isPrime(2809)).IsFalse()
 }
+
+func TestThatReallyBigNumberIsPrime(t *testing.T) {
+	assert := Setup(t)
+	assert.ThatBool(isPrime(2147483647)).IsTrue()
+}
+
+func TestThatReallyBigNumberIsNotPrime(t *testing.T) {
+	assert := Setup(t)
+	assert.ThatBool(isPrime(46337 * 46337)).IsFalse()
+}
