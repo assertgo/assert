@@ -1,16 +1,22 @@
 package assert
 
+import (
+	"io/ioutil"
+	"log"
+	"math/big"
+
+	"github.com/akalin/aks-go/aks"
+)
+
 func isPrime(value int) bool {
-	if value <= 3 {
-		return value >= 2
-	}
-	if value%2 == 0 || value%3 == 0 {
+	if value < 2 {
 		return false
 	}
-	for i := 5; i*i <= value; i += 6 {
-		if value%i == 0 || value%(i+2) == 0 {
-			return false
-		}
-	}
-	return true
+	n := big.NewInt(int64(value))
+	jobs := 1
+	r := aks.CalculateAKSModulus(n)
+	M := aks.CalculateAKSUpperBound(n, r)
+	logger := log.New(ioutil.Discard, "", 0)
+	a := aks.GetAKSWitness(n, r, &big.Int{}, M, jobs, logger)
+	return a == nil
 }
