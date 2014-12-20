@@ -5,6 +5,10 @@ type assertProviderImpl struct {
 	logger errorLogger
 }
 
+func setupImpl(t TestingT, logger errorLogger) AssertProvider {
+	return &assertProviderImpl{t, logger}
+}
+
 func (assertProvider *assertProviderImpl) ThatInt(actual int) IntAssert {
 	return &intAssertImpl{assertProvider.t, assertProvider.logger, actual}
 }
