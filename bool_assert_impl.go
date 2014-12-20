@@ -1,13 +1,12 @@
 package assert
 
 type boolAssertImpl struct {
-	t      TestingT
-	logger errorLogger
-	actual bool
+	logFacade *logFacade
+	actual    bool
 }
 
 func (assert *boolAssertImpl) isTrue(condition bool, format string, args ...interface{}) *boolAssertImpl {
-	logIfFalse(assert.t, assert.logger, condition, format, args...)
+	logIfFalse(assert.logFacade, condition, format, args...)
 	return assert
 }
 

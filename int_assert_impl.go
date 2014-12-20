@@ -6,13 +6,12 @@ import (
 )
 
 type intAssertImpl struct {
-	t      TestingT
-	logger errorLogger
-	actual int
+	logFacade *logFacade
+	actual    int
 }
 
 func (assert *intAssertImpl) isTrue(condition bool, format string, args ...interface{}) *intAssertImpl {
-	logIfFalse(assert.t, assert.logger, condition, format, args...)
+	logIfFalse(assert.logFacade, condition, format, args...)
 	return assert
 }
 

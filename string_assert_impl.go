@@ -3,13 +3,12 @@ package assert
 import "strings"
 
 type stringAssertImpl struct {
-	t      TestingT
-	logger errorLogger
-	actual string
+	logFacade *logFacade
+	actual    string
 }
 
 func (assert *stringAssertImpl) isTrue(condition bool, format string, args ...interface{}) *stringAssertImpl {
-	logIfFalse(assert.t, assert.logger, condition, format, args...)
+	logIfFalse(assert.logFacade, condition, format, args...)
 	return assert
 }
 
