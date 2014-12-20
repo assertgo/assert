@@ -1,6 +1,9 @@
 package assert
 
-import "os"
+import (
+	"io"
+	"os"
+)
 
 type errorLogger interface {
 	Log(location *location, message string)
@@ -11,14 +14,10 @@ func newLogger() errorLogger {
 }
 
 type errorLoggerImpl struct {
-	writer stringWriter
+	writer io.Writer
 }
 
 func (logger *errorLoggerImpl) Log(location *location, message string) {
-}
-
-type stringWriter interface {
-	WriteString(s string) (n int, err error)
 }
 
 type location struct {
