@@ -3,14 +3,14 @@ package assert
 import "testing"
 
 func TestThatStringIsEqualToHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Alice").IsEqualTo("Alice").IsEqualTo("Alice")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Alice").IsEqualTo("Alice").IsEqualTo("Alice")
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsEqualToHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Alice").IsEqualTo("Bob").IsEqualTo("Charlie")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Alice").IsEqualTo("Bob").IsEqualTo("Charlie")
 	mockT.HasErrorMessages(
 		"Expected <Bob>, but was <Alice>.",
 		"Expected <Charlie>, but was <Alice>.",
@@ -18,154 +18,154 @@ func TestThatStringIsEqualToHasErrorMessages(t *testing.T) {
 }
 
 func TestThatStringIsNotEqualToHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Alice").IsNotEqualTo("Bob").IsNotEqualTo("Bob")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Alice").IsNotEqualTo("Bob").IsNotEqualTo("Bob")
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsNotEqualToHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Alice").IsNotEqualTo("Alice")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Alice").IsNotEqualTo("Alice")
 	mockT.HasErrorMessages(
 		"Expected string not equal to <Alice>, but was equal.",
 	)
 }
 
 func TestThatStringIsEmptyHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "").IsEmpty()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("").IsEmpty()
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsEmptyHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").IsEmpty()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").IsEmpty()
 	mockT.HasErrorMessages(
 		"Expected string to be empty, but was <Marta>.",
 	)
 }
 
 func TestThatStringIsNotEmptyHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").IsNotEmpty()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").IsNotEmpty()
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsNotEmptyHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "").IsNotEmpty()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("").IsNotEmpty()
 	mockT.HasErrorMessages(
 		"Expected string to not be empty, but was.",
 	)
 }
 
 func TestThatStringIsInSliceHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").IsInSlice([]string{"Marta"})
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").IsInSlice([]string{"Marta"})
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsInSliceHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").IsInSlice([]string{"Michal", "Macy"})
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").IsInSlice([]string{"Michal", "Macy"})
 	mockT.HasErrorMessages(
 		"Expected string to be in slice <[Michal Macy]>, but wasn't.",
 	)
 }
 
 func TestThatStringIsNotInSliceHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").IsNotInSlice([]string{"Michal"})
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").IsNotInSlice([]string{"Michal"})
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsNotInSliceHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").IsNotInSlice([]string{"Marta"})
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").IsNotInSlice([]string{"Marta"})
 	mockT.HasErrorMessages(
 		"Expected string to not be in slice <[Marta]>, but was.",
 	)
 }
 
 func TestThatStringContainsHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").Contains("art")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").Contains("art")
 	mockT.HasNoErrors()
 }
 
 func TestThatStringContainsHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").Contains("Michal")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").Contains("Michal")
 	mockT.HasErrorMessages(
 		"Expected string <Marta> to contain <Michal>, but didn't.",
 	)
 }
 
 func TestThatStringDoesNotContainHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").DoesNotContain("Michal")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").DoesNotContain("Michal")
 	mockT.HasNoErrors()
 }
 
 func TestThatStringDoesNotContainHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").DoesNotContain("art")
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").DoesNotContain("art")
 	mockT.HasErrorMessages(
 		"Expected string <Marta> to not contain <art>, but it did.",
 	)
 }
 
 func TestThatStringIsLowerCaseHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "marta").IsLowerCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("marta").IsLowerCase()
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsLowerCaseHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "Marta").IsLowerCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Marta").IsLowerCase()
 	mockT.HasErrorMessages(
 		"Expected string <Marta> to be lower case, but wasn't.",
 	)
 }
 
 func TestThatStringIsUpperCaseHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "MARTA").IsUpperCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("MARTA").IsUpperCase()
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsUpperCaseHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "MArTa").IsUpperCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("MArTa").IsUpperCase()
 	mockT.HasErrorMessages(
 		"Expected string <MArTa> to be upper case, but wasn't.",
 	)
 }
 
 func TestThatStringIsNotLowerCaseHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "MArta").IsNotLowerCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("MArta").IsNotLowerCase()
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsNotLowerCaseHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "marta").IsNotLowerCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("marta").IsNotLowerCase()
 	mockT.HasErrorMessages(
 		"Expected string <marta> to not be lower case, but was.",
 	)
 }
 
 func TestThatStringIsNotUpperCaseHasNoErrors(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "MArta").IsNotUpperCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("MArta").IsNotUpperCase()
 	mockT.HasNoErrors()
 }
 
 func TestThatStringIsNotUpperCaseHasErrorMessages(t *testing.T) {
-	mockT := newMockT(t)
-	ThatString(mockT, "MARTA").IsNotUpperCase()
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("MARTA").IsNotUpperCase()
 	mockT.HasErrorMessages(
 		"Expected string <MARTA> to not be upper case, but was.",
 	)
