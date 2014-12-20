@@ -5,13 +5,13 @@ type assertProviderImpl struct {
 }
 
 func (assertProvider *assertProviderImpl) ThatInt(actual int) IntAssert {
-	return ThatInt(assertProvider.t, actual)
+	return &intAssertImpl{assertProvider.t, actual}
 }
 
 func (assertProvider *assertProviderImpl) ThatString(actual string) StringAssert {
-	return ThatString(assertProvider.t, actual)
+	return &stringAssertImpl{assertProvider.t, actual}
 }
 
 func (assertProvider *assertProviderImpl) ThatBool(actual bool) BoolAssert {
-	return ThatBool(assertProvider.t, actual)
+	return &boolAssertImpl{assertProvider.t, actual}
 }
