@@ -1,9 +1,5 @@
 package assert
 
-func ThatInt(t TestingT, actual int) IntAssert {
-	return &intAssertImpl{t, theLogger, actual}
-}
-
 type IntAssert interface {
 	IsZero() IntAssert
 	IsNonZero() IntAssert
