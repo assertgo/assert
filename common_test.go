@@ -11,6 +11,12 @@ type mockTestingT struct {
 	errors []string
 }
 
+func setupWithMockT(t *testing.T) (assert AssertProvider, mockT *mockTestingT) {
+	mockT = newMockT(t)
+	assert = Setup(mockT)
+	return
+}
+
 func newMockT(t *testing.T) *mockTestingT {
 	return &mockTestingT{t: t}
 }
