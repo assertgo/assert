@@ -21,4 +21,5 @@ type StringAssert interface {
 	// HasSuffix(suffix string) StringAssert
 	// IgnoringCase() StringAssert // new assert that doesn't care about case
 	// Length() IntAssert // new assert to check on length of the string
+	// LevenshteinDistance(other string) IntAssert // new assert to check in distance between words
 }
