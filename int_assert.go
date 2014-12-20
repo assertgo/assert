@@ -1,9 +1,7 @@
 package assert
 
-import "os"
-
 func ThatInt(t TestingT, actual int) IntAssert {
-	return &intAssertImpl{t, &errorLoggerImpl{os.Stderr}, actual}
+	return &intAssertImpl{t, newLogger(), actual}
 }
 
 type IntAssert interface {

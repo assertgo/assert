@@ -1,7 +1,13 @@
 package assert
 
+import "os"
+
 type errorLogger interface {
 	Log(location *location, message string)
+}
+
+func newLogger() errorLogger {
+	return &errorLoggerImpl{os.Stderr}
 }
 
 type errorLoggerImpl struct {
