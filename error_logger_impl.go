@@ -24,5 +24,5 @@ type errorLoggerImpl struct {
 }
 
 func (logger *errorLoggerImpl) Log(location *location, message string) {
-	// TODO: log using io.WriteString(logger.writer, ...)
+	// TODO: log using io.WriteString(logger.writer, ...) or fmt.Fprintf(logger.writer, ...)
 }
