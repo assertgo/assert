@@ -22,5 +22,6 @@ type IntAssert interface {
 	IsDivisibleBy(divisor int) IntAssert
 	IsNotDivisibleBy(divisor int) IntAssert
 	IsPrime() IntAssert
+	IsNotPrime() IntAssert
 	IsAnswerToTheUltimateQuestionOfLife() IntAssert
 }

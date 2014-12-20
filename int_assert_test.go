@@ -328,6 +328,22 @@ func TestThatIntIsPrimeHasErrorMessages(t *testing.T) {
 	)
 }
 
+func TestThatIntIsNotPrimeHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatInt(25).IsNotPrime().IsNotPrime()
+	mockT.HasNoErrors()
+}
+
+func TestThatIntIsNotPrimeHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatInt(5).IsNotPrime()
+	assert.ThatInt(31).IsNotPrime()
+	mockT.HasErrorMessages(
+		"Expected integer not to be prime, but was <5>.",
+		"Expected integer not to be prime, but was <31>.",
+	)
+}
+
 func TestThatIntIsAnswerToTheUltimateQuestionOfLifeHasNoErrors(t *testing.T) {
 	assert, mockT := setupWithMockT(t)
 	assert.ThatInt(42).IsAnswerToTheUltimateQuestionOfLife().IsAnswerToTheUltimateQuestionOfLife()
