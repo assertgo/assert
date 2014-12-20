@@ -7,7 +7,7 @@ type boolAssertImpl struct {
 }
 
 func (assert *boolAssertImpl) isTrue(condition bool, format string, args ...interface{}) *boolAssertImpl {
-	logIfFalse(assert.t, condition, format, args...)
+	logIfFalse(assert.t, assert.logger, condition, format, args...)
 	return assert
 }
 

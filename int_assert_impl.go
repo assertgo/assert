@@ -12,7 +12,7 @@ type intAssertImpl struct {
 }
 
 func (assert *intAssertImpl) isTrue(condition bool, format string, args ...interface{}) *intAssertImpl {
-	logIfFalse(assert.t, condition, format, args...)
+	logIfFalse(assert.t, assert.logger, condition, format, args...)
 	return assert
 }
 

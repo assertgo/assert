@@ -1,34 +1,38 @@
 package assert
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
 
 type mockTestingT struct {
 	t      *testing.T
+	failed bool
 	errors []string
 }
 
 func setupWithMockT(t *testing.T) (assert AssertProvider, mockT *mockTestingT) {
 	mockT = &mockTestingT{t: t}
-	assert = setupImpl(mockT, theLogger)
+	assert = setupImpl(mockT, mockT)
 	return
 }
 
-func (mockT *mockTestingT) Errorf(format string, args ...interface{}) {
-	mockT.errors = append(mockT.errors, fmt.Sprintf(format, args...))
+func (mockT *mockTestingT) Log(location *location, message string) {
+	mockT.errors = append(mockT.errors, message)
+}
+
+func (mockT *mockTestingT) Fail() {
+	mockT.failed = true
 }
 
 func (mockT *mockTestingT) HasNoErrors() {
-	if len(mockT.errors) > 0 {
+	if mockT.failed || len(mockT.errors) > 0 {
 		mockT.t.Errorf("Expected to have no errors, but had %d.", len(mockT.errors))
 	}
 }
 
 func (mockT *mockTestingT) HasErrorMessages(messages ...string) {
-	if !reflect.DeepEqual(mockT.errors, messages) {
+	if !mockT.failed || !reflect.DeepEqual(mockT.errors, messages) {
 		mockT.t.Errorf("Expected <%s>, but was <%s>.", messages, mockT.errors)
 	}
 }
