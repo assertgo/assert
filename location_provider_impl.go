@@ -6,12 +6,13 @@ import (
 )
 
 func provideLocation() location {
-	pc, path, _, _ := runtime.Caller(1)
+	pc, path, line, _ := runtime.Caller(1)
 	testName := parseTestName(pc)
 	file := fileFromPath(path)
 	return location{
 		Test:     testName,
 		FileName: file,
+		Line:     line,
 	}
 }
 
