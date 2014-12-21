@@ -8,16 +8,16 @@ func anotherFunction() *location {
 
 func TestLocationProvider(t *testing.T) {
 	assert := Setup(t)
-	location := provideLocation(0)
-	assert.ThatString(location.FileName).IsEqualTo("location_provider_test.go")
-	assert.ThatString(location.Test).IsEqualTo("TestLocationProvider")
-	assert.ThatInt(location.Line).IsEqualTo(11)
+	thisLineLocation := provideLocation(0)
+	assert.That(thisLineLocation).IsEqualTo(
+		&location{"TestLocationProvider", "location_provider_test.go", 11},
+	)
 }
 
 func TestLocationProviderCalledFromAnotherFunction(t *testing.T) {
 	assert := Setup(t)
-	location := anotherFunction()
-	assert.ThatString(location.FileName).IsEqualTo("location_provider_test.go")
-	assert.ThatString(location.Test).IsEqualTo("TestLocationProviderCalledFromAnotherFunction")
-	assert.ThatInt(location.Line).IsEqualTo(6)
+	insideAnotherFunctionLocation := anotherFunction()
+	assert.That(insideAnotherFunctionLocation).IsEqualTo(
+		&location{"TestLocationProviderCalledFromAnotherFunction", "location_provider_test.go", 6},
+	)
 }
