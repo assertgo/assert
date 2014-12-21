@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-func provideLocation() location {
-	testName, path, line := testCallerInfo()
+func provideLocation(skip int) location {
+	testName, path, line := testCallerInfo(skip + 1)
 	file := fileFromPath(path)
 	return location{
 		Test:     testName,
@@ -15,9 +15,9 @@ func provideLocation() location {
 	}
 }
 
-func testCallerInfo() (testName string, path string, line int) {
-	testName, path, line = callerInfo(3)
-	for skip := 4; !strings.HasPrefix(testName, "Test"); skip++ {
+func testCallerInfo(s int) (testName string, path string, line int) {
+	testName, path, line = callerInfo(s + 2)
+	for skip := s + 3; !strings.HasPrefix(testName, "Test"); skip++ {
 		testName, _, _ = callerInfo(skip)
 	}
 	return
