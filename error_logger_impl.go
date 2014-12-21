@@ -23,5 +23,5 @@ type errorLoggerImpl struct {
 }
 
 func (logger *errorLoggerImpl) Log(location *location, message string) {
-	fmt.Fprintf(logger.writer, "--- FAIL: TestSimple\n\tsimple_test.go:66\n\t\tExpected KABOOM!\n")
+	fmt.Fprintf(logger.writer, "--- FAIL: %s\n\t%s:%d\n\t\t%s\n", location.Test, location.FileName, location.Line, message)
 }
