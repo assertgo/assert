@@ -6,17 +6,28 @@ import (
 )
 
 func provideLocation() location {
-	pc, _, _, _ := runtime.Caller(1)
+	pc, path, _, _ := runtime.Caller(1)
 	testName := parseTestName(pc)
+	file := fileFromPath(path)
 	return location{
 		Test:     testName,
-		FileName: "location_provider_test.go",
+		FileName: file,
 	}
 }
 
+func fileFromPath(path string) (file string) {
+	file = substringAfter(path, "/")
+	return
+}
+
 func parseTestName(pc uintptr) (testName string) {
-	testName = runtime.FuncForPC(pc).Name()
-	index := strings.LastIndex(testName, ".")
-	testName = testName[index+1:]
+	fullTestName := runtime.FuncForPC(pc).Name()
+	testName = substringAfter(fullTestName, ".")
+	return
+}
+
+func substringAfter(str string, sep string) (substring string) {
+	index := strings.LastIndex(str, sep)
+	substring = str[index+1:]
 	return
 }
