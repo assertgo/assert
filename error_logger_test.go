@@ -39,6 +39,17 @@ func TestErrorLoggerTwoTestsFailing(t *testing.T) {
 			"\t\tExpected BAZOOKA?\n")
 }
 
+func TestErrorLoggerSecondErrorOnTheSameLine(t *testing.T) {
+	assert, buffer, logger := setupWithLogger(t)
+	logger.Log(&location{"TestChain", "chain_test.go", 42}, "Expected CHAIN!")
+	logger.Log(&location{"TestChain", "chain_test.go", 42}, "Expected SAW?")
+	assert.ThatString(buffer.String()).IsEqualTo(
+		"--- FAIL: TestChain\n" +
+			"\tchain_test.go:42\n" +
+			"\t\tExpected CHAIN!\n" +
+			"\t\tExpected SAW?\n")
+}
+
 func setupWithLogger(t *testing.T) (assert AssertProvider, buffer *bytes.Buffer, logger errorLogger) {
 	assert = Setup(t)
 	buffer = &bytes.Buffer{}
