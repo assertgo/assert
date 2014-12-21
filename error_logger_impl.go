@@ -16,12 +16,18 @@ type errorLogger interface {
 	Log(location *location, message string)
 }
 
-var theLogger errorLogger = &errorLoggerImpl{os.Stderr}
+var theLogger errorLogger = &errorLoggerImpl{writer: os.Stdout}
 
 type errorLoggerImpl struct {
-	writer io.Writer
+	writer         io.Writer
+	alreadyWritten bool
 }
 
 func (logger *errorLoggerImpl) Log(location *location, message string) {
-	fmt.Fprintf(logger.writer, "--- FAIL: %s\n\t%s:%d\n\t\t%s\n", location.Test, location.FileName, location.Line, message)
+	if logger.alreadyWritten == false {
+		fmt.Fprintf(logger.writer, "--- FAIL: %s\n\t%s:%d\n\t\t%s\n", location.Test, location.FileName, location.Line, message)
+		logger.alreadyWritten = true
+	} else {
+		fmt.Fprintf(logger.writer, "\t%s:%d\n\t\t%s\n", location.FileName, location.Line, message)
+	}
 }
