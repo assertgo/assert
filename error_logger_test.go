@@ -16,17 +16,6 @@ func TestErrorLoggerSimpleCase(t *testing.T) {
 			"\t\tExpected KABOOM!\n")
 }
 
-func TestErrorLoggerSimpleCase2(t *testing.T) {
-	assert, buffer, logger := setupWithLogger(t)
-	location := &location{"TestSimple2", "simple_test2.go", 50}
-	message := "Expected KABLAMM!"
-	logger.Log(location, message)
-	assert.ThatString(buffer.String()).IsEqualTo(
-		"--- FAIL: TestSimple2\n" +
-			"\tsimple_test2.go:50\n" +
-			"\t\tExpected KABLAMM!\n")
-}
-
 func setupWithLogger(t *testing.T) (assert AssertProvider, buffer *bytes.Buffer, logger errorLogger) {
 	assert = Setup(t)
 	buffer = &bytes.Buffer{}
