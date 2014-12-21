@@ -16,9 +16,9 @@ func provideLocation() location {
 }
 
 func testCallerInfo() (testName string, path string, line int) {
-	testName, path, line = callerInfo(0)
-	for skip := 1; !strings.HasPrefix(testName, "Test"); skip++ {
-		testName, path, line = callerInfo(skip)
+	testName, path, line = callerInfo(3)
+	for skip := 4; !strings.HasPrefix(testName, "Test"); skip++ {
+		testName, _, _ = callerInfo(skip)
 	}
 	return
 }
