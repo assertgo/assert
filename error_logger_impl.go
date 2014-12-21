@@ -25,7 +25,7 @@ type errorLoggerImpl struct {
 }
 
 const (
-	failOutput                  = "--- FAIL: %s\n\t%s:%d\n\t\t%s\n"
+	failOutput                  = "\n--- FAIL: %s\n\t%s:%d\n\t\t%s\n"
 	failOutputWithoutFailLine   = "\t%s:%d\n\t\t%s\n"
 	failOutputWithoutLineNumber = "\t\t%s\n"
 )
