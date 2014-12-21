@@ -19,8 +19,8 @@ type errorLogger interface {
 var theLogger errorLogger = &errorLoggerImpl{writer: os.Stdout}
 
 type errorLoggerImpl struct {
-	writer         io.Writer
-	alreadyWritten bool
+	writer       io.Writer
+	prevTestName string
 }
 
 const (
@@ -30,10 +30,10 @@ const (
 
 func (logger *errorLoggerImpl) Log(location *location, message string) {
 	args := []interface{}{location.Test, location.FileName, location.Line, message}
-	if logger.alreadyWritten == false {
+	if logger.prevTestName != location.Test {
 		fmt.Fprintf(logger.writer, failOutput, args...)
-		logger.alreadyWritten = true
 	} else {
 		fmt.Fprintf(logger.writer, failOutputWithoutFailLine, args[1:]...)
 	}
+	logger.prevTestName = location.Test
 }
