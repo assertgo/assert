@@ -9,6 +9,7 @@ func Setup(t TestingT) AssertProvider {
 }
 
 type AssertProvider interface {
+	That(actual interface{}) AnyTypeAssert
 	ThatInt(actual int) IntAssert
 	ThatString(actual string) StringAssert
 	ThatBool(actual bool) BoolAssert

@@ -15,6 +15,10 @@ func setupImpl(t TestingT, logger errorLogger) AssertProvider {
 	return &assertProviderImpl{&logFacade{t, logger}}
 }
 
+func (assertProvider *assertProviderImpl) That(actual interface{}) AnyTypeAssert {
+	return &anyTypeAssertImpl{assertProvider.logFacade, actual}
+}
+
 func (assertProvider *assertProviderImpl) ThatInt(actual int) IntAssert {
 	return &intAssertImpl{assertProvider.logFacade, actual}
 }
