@@ -24,7 +24,10 @@ func testCallerInfo(skip int) (testName string, path string, line int) {
 }
 
 func callerInfo(skip int) (methodName string, path string, line int) {
-	pc, path, line, _ := runtime.Caller(skip + 1)
+	pc, path, line, ok := runtime.Caller(skip + 1)
+	if !ok {
+		panic("you shall not pass!")
+	}
 	methodName = methodNameFromPC(pc)
 	return
 }

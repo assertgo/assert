@@ -21,3 +21,13 @@ func TestLocationProviderCalledFromAnotherFunction(t *testing.T) {
 		&location{"TestLocationProviderCalledFromAnotherFunction", "location_provider_test.go", 6},
 	)
 }
+
+func TestLocationProviderPanicsWhenUsedIncorrectly(t *testing.T) {
+	assert := Setup(t)
+	defer func() {
+		r := recover()
+		assert.That(r).IsEqualTo("you shall not pass!")
+	}()
+	provideLocation(1)
+	t.Fail()
+}
