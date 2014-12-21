@@ -1,5 +1,7 @@
 package assert
 
+import "fmt"
+
 type assertProviderImpl struct {
 	logFacade *logFacade
 }
@@ -23,6 +25,14 @@ func (assertProvider *assertProviderImpl) ThatString(actual string) StringAssert
 
 func (assertProvider *assertProviderImpl) ThatBool(actual bool) BoolAssert {
 	return &boolAssertImpl{assertProvider.logFacade, actual}
+}
+
+func logIfFalse(logFacade *logFacade, condition bool, format string, args ...interface{}) {
+	if !condition {
+		location := &location{"TestFooBar", "foo_bar_test.go", 66}
+		message := fmt.Sprintf(format, args...)
+		logFacade.Log(location, message)
+	}
 }
 
 func (logFacade *logFacade) Log(location *location, message string) {
