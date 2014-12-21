@@ -34,12 +34,10 @@ func (logger *errorLoggerImpl) Log(location *location, message string) {
 	args := []interface{}{location.Test, location.FileName, location.Line, message}
 	if logger.prevTestName != location.Test {
 		fmt.Fprintf(logger.writer, failOutput, args...)
+	} else if logger.prevTestLine != location.Line {
+		fmt.Fprintf(logger.writer, failOutputWithoutFailLine, args[1:]...)
 	} else {
-		if logger.prevTestLine != location.Line {
-			fmt.Fprintf(logger.writer, failOutputWithoutFailLine, args[1:]...)
-		} else {
-			fmt.Fprintf(logger.writer, failOutputWithoutLineNumber, message)
-		}
+		fmt.Fprintf(logger.writer, failOutputWithoutLineNumber, message)
 	}
 	logger.prevTestName = location.Test
 	logger.prevTestLine = location.Line
