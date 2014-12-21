@@ -6,14 +6,27 @@ import (
 )
 
 func provideLocation() location {
-	pc, path, line, _ := runtime.Caller(1)
-	testName := parseTestName(pc)
+	testName, path, line := testCallerInfo()
 	file := fileFromPath(path)
 	return location{
 		Test:     testName,
 		FileName: file,
 		Line:     line,
 	}
+}
+
+func testCallerInfo() (testName string, path string, line int) {
+	testName, path, line = callerInfo(0)
+	for skip := 1; !strings.HasPrefix(testName, "Test"); skip++ {
+		testName, path, line = callerInfo(skip)
+	}
+	return
+}
+
+func callerInfo(skip int) (testName string, path string, line int) {
+	pc, path, line, _ := runtime.Caller(skip)
+	testName = parseTestName(pc)
+	return
 }
 
 func fileFromPath(path string) (file string) {
