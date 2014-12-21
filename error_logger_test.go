@@ -6,9 +6,7 @@ import (
 )
 
 func TestErrorLoggerSimpleCase(t *testing.T) {
-	assert := Setup(t)
-	buffer := &bytes.Buffer{}
-	logger := &errorLoggerImpl{buffer}
+	assert, buffer, logger := setupWithLogger(t)
 	location := &location{"TestSimple", "simple_test.go", 66}
 	message := "Expected KABOOM!"
 	logger.Log(location, message)
@@ -19,9 +17,7 @@ func TestErrorLoggerSimpleCase(t *testing.T) {
 }
 
 func TestErrorLoggerSimpleCase2(t *testing.T) {
-	assert := Setup(t)
-	buffer := &bytes.Buffer{}
-	logger := &errorLoggerImpl{buffer}
+	assert, buffer, logger := setupWithLogger(t)
 	location := &location{"TestSimple2", "simple_test2.go", 50}
 	message := "Expected KABLAMM!"
 	logger.Log(location, message)
@@ -29,4 +25,11 @@ func TestErrorLoggerSimpleCase2(t *testing.T) {
 		"--- FAIL: TestSimple2\n" +
 			"\tsimple_test2.go:50\n" +
 			"\t\tExpected KABLAMM!\n")
+}
+
+func setupWithLogger(t *testing.T) (assert AssertProvider, buffer *bytes.Buffer, logger errorLogger) {
+	assert = Setup(t)
+	buffer = &bytes.Buffer{}
+	logger = &errorLoggerImpl{buffer}
+	return
 }
