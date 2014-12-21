@@ -1,6 +1,7 @@
 package assert
 
 import (
+	"fmt"
 	"io"
 	"os"
 )
@@ -22,5 +23,5 @@ type errorLoggerImpl struct {
 }
 
 func (logger *errorLoggerImpl) Log(location *location, message string) {
-	// TODO: log using io.WriteString(logger.writer, ...) or fmt.Fprintf(logger.writer, ...)
+	fmt.Fprintf(logger.writer, "--- FAIL: TestSimple\n\tsimple_test.go:66\n\t\tExpected KABOOM!\n")
 }
