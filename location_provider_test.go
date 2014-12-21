@@ -2,28 +2,22 @@ package assert
 
 import "testing"
 
+func anotherFunction() *location {
+	return provideLocation(0)
+}
+
 func TestLocationProvider(t *testing.T) {
 	assert := Setup(t)
 	location := provideLocation(0)
 	assert.ThatString(location.FileName).IsEqualTo("location_provider_test.go")
 	assert.ThatString(location.Test).IsEqualTo("TestLocationProvider")
-	assert.ThatInt(location.Line).IsEqualTo(7)
+	assert.ThatInt(location.Line).IsEqualTo(11)
 }
 
-func TestLocationProviderCase2(t *testing.T) {
-	assert := Setup(t)
-	location := provideLocation(0)
-	assert.ThatString(location.FileName).IsEqualTo("location_provider_test.go")
-	assert.ThatString(location.Test).IsEqualTo("TestLocationProviderCase2")
-}
-
-func TestCalledFromAnotherFunction(t *testing.T) {
+func TestLocationProviderCalledFromAnotherFunction(t *testing.T) {
 	assert := Setup(t)
 	location := anotherFunction()
 	assert.ThatString(location.FileName).IsEqualTo("location_provider_test.go")
-	assert.ThatString(location.Test).IsEqualTo("TestCalledFromAnotherFunction")
-}
-
-func anotherFunction() location {
-	return provideLocation(0)
+	assert.ThatString(location.Test).IsEqualTo("TestLocationProviderCalledFromAnotherFunction")
+	assert.ThatInt(location.Line).IsEqualTo(6)
 }

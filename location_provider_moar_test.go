@@ -7,12 +7,13 @@ func TestLocationProviderCorrectFileName(t *testing.T) {
 	location := provideLocation(0)
 	assert.ThatString(location.FileName).IsEqualTo("location_provider_moar_test.go")
 	assert.ThatString(location.Test).IsEqualTo("TestLocationProviderCorrectFileName")
+	assert.ThatInt(location.Line).IsEqualTo(7)
 }
 
-func TestCalledFromYetAnotherFunction(t *testing.T) {
+func TestLocationProviderCalledFromAnotherFile(t *testing.T) {
 	assert := Setup(t)
 	location := anotherFunction()
 	assert.ThatString(location.FileName).IsEqualTo("location_provider_test.go")
-	assert.ThatString(location.Test).IsEqualTo("TestCalledFromYetAnotherFunction")
-	assert.ThatInt(location.Line).IsEqualTo(28)
+	assert.ThatString(location.Test).IsEqualTo("TestLocationProviderCalledFromAnotherFile")
+	assert.ThatInt(location.Line).IsEqualTo(6)
 }

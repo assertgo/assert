@@ -31,7 +31,7 @@ func logIfFalse(logFacade *logFacade, condition bool, format string, args ...int
 	if !condition {
 		location := provideLocation(3)
 		message := fmt.Sprintf(format, args...)
-		logFacade.Log(&location, message)
+		logFacade.Log(location, message)
 	}
 }
 
