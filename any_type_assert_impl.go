@@ -18,3 +18,8 @@ func (assert *anyTypeAssertImpl) IsEqualTo(expected interface{}) AnyTypeAssert {
 	return assert.isTrue(reflect.DeepEqual(assert.actual, expected),
 		"Expected <%v>, but was <%v>.", expected, assert.actual)
 }
+
+func (assert *anyTypeAssertImpl) IsNotEqualTo(expected interface{}) AnyTypeAssert {
+	return assert.isTrue(!reflect.DeepEqual(assert.actual, expected),
+		"Expected value not equal to <%v>, but was equal.", expected)
+}

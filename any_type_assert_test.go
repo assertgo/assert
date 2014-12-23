@@ -19,3 +19,21 @@ func TestThatIsEqualToHasErrorMessages(t *testing.T) {
 		"Expected <&{TestFoo foo_test.go 33}>, but was <&{TestFoo foo_test.go 66}>.",
 	)
 }
+
+func TestThatIsNotEqualToHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(location{"TestFoo", "foo_test.go", 66}).IsNotEqualTo(location{"TestBar", "bar_test.go", 66})
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).IsNotEqualTo(&location{"TestFoo", "foo_test.go", 33})
+	mockT.HasNoErrors()
+}
+
+func TestThatIsNotEqualToHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(location{"TestFoo", "foo_test.go", 66}).
+		IsNotEqualTo(location{"TestFoo", "foo_test.go", 66}).
+		IsNotEqualTo(location{"TestFoo", "foo_test.go", 66})
+	mockT.HasErrorMessages(
+		"Expected value not equal to <{TestFoo foo_test.go 66}>, but was equal.",
+		"Expected value not equal to <{TestFoo foo_test.go 66}>, but was equal.",
+	)
+}
