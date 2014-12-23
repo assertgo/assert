@@ -50,6 +50,19 @@ func TestErrorLoggerSecondErrorOnTheSameLine(t *testing.T) {
 			"\t\tExpected SAW?\n")
 }
 
+func TestErrorLoggerDifferentFileSameLine(t *testing.T) {
+	assert, buffer, logger := setupWithLogger(t)
+	logger.Log(&location{"TestFirst", "first_test.go", 99}, "Expected First!")
+	logger.Log(&location{"TestSecond", "second_test.go", 99}, "Expected Second?")
+	assert.ThatString(buffer.String()).IsEqualTo(
+		"\n--- FAIL: TestFirst\n" +
+			"\tfirst_test.go:99\n" +
+			"\t\tExpected First!\n" +
+			"\n--- FAIL: TestSecond\n" +
+			"\tsecond_test.go:99\n" +
+			"\t\tExpected Second?\n")
+}
+
 func setupWithLogger(t *testing.T) (assert AssertProvider, buffer *bytes.Buffer, logger errorLogger) {
 	assert = Setup(t)
 	buffer = &bytes.Buffer{}
