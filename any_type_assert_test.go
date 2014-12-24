@@ -37,3 +37,37 @@ func TestThatIsNotEqualToHasErrorMessages(t *testing.T) {
 		"Expected value not equal to <{TestFoo foo_test.go 66}>, but was equal.",
 	)
 }
+
+func TestThatIsNilHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(nil).IsNil().IsNil()
+	mockT.HasNoErrors()
+}
+
+func TestThatIsNilHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("nil").IsNil()
+	assert.That(location{"TestFoo", "foo_test.go", 66}).IsNil()
+	mockT.HasErrorMessages(
+		"Expected value to be nil, but was <nil>.",
+		"Expected value to be nil, but was <{TestFoo foo_test.go 66}>.",
+	)
+}
+
+func TestThatIsNotNilHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("").IsNotNil()
+	assert.That(0).IsNotNil()
+	assert.That(location{"TestFoo", "foo_test.go", 66}).IsNotNil()
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).IsNotNil()
+	mockT.HasNoErrors()
+}
+
+func TestThatIsNotNilHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(nil).IsNotNil().IsNotNil()
+	mockT.HasErrorMessages(
+		"Expected value not to be nil, but was.",
+		"Expected value not to be nil, but was.",
+	)
+}

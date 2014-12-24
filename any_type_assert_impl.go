@@ -23,3 +23,13 @@ func (assert *anyTypeAssertImpl) IsNotEqualTo(expected interface{}) AnyTypeAsser
 	return assert.isTrue(!reflect.DeepEqual(assert.actual, expected),
 		"Expected value not equal to <%v>, but was equal.", expected)
 }
+
+func (assert *anyTypeAssertImpl) IsNil() AnyTypeAssert {
+	return assert.isTrue(assert.actual == nil,
+		"Expected value to be nil, but was <%v>.", assert.actual)
+}
+
+func (assert *anyTypeAssertImpl) IsNotNil() AnyTypeAssert {
+	return assert.isTrue(assert.actual != nil,
+		"Expected value not to be nil, but was.")
+}
