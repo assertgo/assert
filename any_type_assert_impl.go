@@ -33,3 +33,12 @@ func (assert *anyTypeAssertImpl) IsNotNil() AnyTypeAssert {
 	return assert.isTrue(assert.actual != nil,
 		"Expected value not to be nil, but was.")
 }
+
+func (assert *anyTypeAssertImpl) AsInt() IntAssert {
+	if actual, ok := assert.actual.(int); ok {
+		return &intAssertImpl{assert.logFacade, actual}
+	} else {
+		assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", assert.actual, assert.actual)
+		return &dummyIntAssertImpl{}
+	}
+}

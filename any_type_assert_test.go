@@ -71,3 +71,20 @@ func TestThatIsNotNilHasErrorMessages(t *testing.T) {
 		"Expected value not to be nil, but was.",
 	)
 }
+
+func TestThatAsIntHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(0).AsInt().IsZero()
+	assert.That(6).AsInt().IsEqualTo(6)
+	mockT.HasNoErrors()
+}
+
+func TestThatAsIntHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("NO!").AsInt()
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).AsInt()
+	mockT.HasErrorMessages(
+		"Cannot convert <NO!> of type <string> to <int>.",
+		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <int>.",
+	)
+}
