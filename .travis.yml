@@ -1,12 +1,15 @@
 language: go
 go:
   - 1.3.3
+env:
+  global:
+    - secure: "MZro3og8xajdl/C14yzotAA8TFUyFM4Euh44WQ0E4jNeUFaItP3YeVdtFkr1hDIZhvjZmrsI2rqFPwSHryhdknqzvR2hagA64g0+w8qCuMxEEsMkQb6CRRk8q14Dks0xDKlQhm/tPNBJFl/gVM9fHS8Bjgvt2VFogKh7gldZR5w="
 before_install:
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
   - go get code.google.com/p/go.tools/cmd/cover
   - go get github.com/darkhelmet/manbearpig
 script:
-  - goveralls -repotoken uRYe7MrN9maQ6amzLvRwjTVFxonK9SFAj
+  - goveralls -repotoken $repotoken
 after_script:
   - ./check_tests -v
