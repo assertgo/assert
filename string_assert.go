@@ -4,10 +4,10 @@ type StringAssert interface {
 	IsEqualTo(expected string) StringAssert
 	IsNotEqualTo(unexpected string) StringAssert
 	IsEmpty() StringAssert
-	IsInSlice(expectedSlice []string) StringAssert
-	Contains(substring string) StringAssert
-	IsNotInSlice(elements []string) StringAssert
 	IsNotEmpty() StringAssert
+	IsInSlice(expectedSlice []string) StringAssert
+	IsNotInSlice(elements []string) StringAssert
+	Contains(substring string) StringAssert
 	DoesNotContain(substring string) StringAssert
 	IsLowerCase() StringAssert
 	IsNotLowerCase() StringAssert
