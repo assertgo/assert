@@ -88,3 +88,20 @@ func TestThatAsIntHasErrorMessages(t *testing.T) {
 		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <int>.",
 	)
 }
+
+func TestThatAsStringHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("").AsString().IsEmpty()
+	assert.That("abcd").AsString().Contains("bc")
+	mockT.HasNoErrors()
+}
+
+func TestThatAsStringHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(777).AsString()
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).AsString()
+	mockT.HasErrorMessages(
+		"Cannot convert <777> of type <int> to <string>.",
+		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <string>.",
+	)
+}

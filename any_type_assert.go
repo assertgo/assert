@@ -6,6 +6,5 @@ type AnyTypeAssert interface {
 	IsNil() AnyTypeAssert
 	IsNotNil() AnyTypeAssert
 	AsInt() IntAssert
-	// TODO
-	// AsString() StringAssert
+	AsString() StringAssert
 }

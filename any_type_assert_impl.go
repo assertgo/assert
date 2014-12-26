@@ -42,3 +42,12 @@ func (assert *anyTypeAssertImpl) AsInt() IntAssert {
 		return &dummyIntAssertImpl{}
 	}
 }
+
+func (assert *anyTypeAssertImpl) AsString() StringAssert {
+	if actual, ok := assert.actual.(string); ok {
+		return &stringAssertImpl{assert.logFacade, actual}
+	} else {
+		assert.isTrue(false, "Cannot convert <%v> of type <%T> to <string>.", assert.actual, assert.actual)
+		return &dummyStringAssertImpl{}
+	}
+}
