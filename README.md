@@ -5,6 +5,8 @@ assertgo
 
 The coolest assertion library for go language!
 
+Version: 1.0.0
+
 ```go
 func TestPerfectNumber(t *testing.T) {
 	assert := assert.Setup(t)
