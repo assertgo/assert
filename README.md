@@ -9,6 +9,19 @@ The coolest assertion library for go language!
 
 Version: 1.0.0
 
+Getting started
+---------------
+
+To get the package, execute:
+
+	go get github.com/assertgo/assert
+
+To import this package, add the following line to your code:
+
+	import "github.com/assertgo/assert"
+
+And just start using it.
+
 ```go
 func TestPerfectNumber(t *testing.T) {
 	assert := assert.Setup(t)
