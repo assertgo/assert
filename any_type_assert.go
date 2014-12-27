@@ -5,6 +5,7 @@ type AnyTypeAssert interface {
 	IsNotEqualTo(unexpected interface{}) AnyTypeAssert
 	IsNil() AnyTypeAssert
 	IsNotNil() AnyTypeAssert
+	AsBool() BoolAssert
 	AsInt() IntAssert
 	AsString() StringAssert
 }

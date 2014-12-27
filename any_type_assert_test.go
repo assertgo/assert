@@ -72,6 +72,23 @@ func TestThatIsNotNilHasErrorMessages(t *testing.T) {
 	)
 }
 
+func TestThatAsBoolHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(false).AsBool().IsFalse()
+	assert.That(true).AsBool().IsTrue()
+	mockT.HasNoErrors()
+}
+
+func TestThatAsBoolHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("NO!").AsBool()
+	assert.That(location{"TestFoo", "foo_test.go", 66}).AsBool()
+	mockT.HasErrorMessages(
+		"Cannot convert <NO!> of type <string> to <bool>.",
+		"Cannot convert <{TestFoo foo_test.go 66}> of type <assert.location> to <bool>.",
+	)
+}
+
 func TestThatAsIntHasNoErrors(t *testing.T) {
 	assert, mockT := setupWithMockT(t)
 	assert.That(0).AsInt().IsZero()
