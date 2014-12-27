@@ -1,7 +1,9 @@
 assertgo
 ========
 
-[![Build Status](https://travis-ci.org/assertgo/assert.svg?branch=develop)](https://travis-ci.org/assertgo/assert) [![Coverage Status](https://coveralls.io/repos/assertgo/assert/badge.png?branch=develop)](https://coveralls.io/r/assertgo/assert?branch=develop)
+[![Build Status](https://travis-ci.org/assertgo/assert.svg?branch=develop)](https://travis-ci.org/assertgo/assert)
+[![Coverage Status](https://coveralls.io/repos/assertgo/assert/badge.png?branch=develop)](https://coveralls.io/r/assertgo/assert?branch=develop)
+[![GoDoc](https://godoc.org/github.com/assertgo/assert?status.svg)](https://godoc.org/github.com/assertgo/assert)
 
 The coolest assertion library for go language!
 
