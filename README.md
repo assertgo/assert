@@ -1,4 +1,4 @@
-assertgo
+assertgo ![](https://raw.githubusercontent.com/assertgo/icon/master/assertgo_64.png)
 ========
 
 [![Build Status](https://travis-ci.org/assertgo/assert.svg?branch=develop)](https://travis-ci.org/assertgo/assert)
