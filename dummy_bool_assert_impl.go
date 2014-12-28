@@ -10,3 +10,7 @@ func (assert *dummyBoolAssertImpl) IsFalse() BoolAssert {
 func (assert *dummyBoolAssertImpl) IsTrue() BoolAssert {
 	return assert
 }
+
+func (assert *dummyBoolAssertImpl) IsSchrödingersCat() BoolAssert {
+	return assert
+}

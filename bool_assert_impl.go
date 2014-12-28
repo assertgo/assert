@@ -12,10 +12,15 @@ func (assert *boolAssertImpl) isTrue(condition bool, format string, args ...inte
 
 func (assert *boolAssertImpl) IsFalse() BoolAssert {
 	return assert.isTrue(assert.actual == false,
-		"Expected <false>, but was <%v>.", assert.actual)
+		"Expected <false>, but was <%t>.", assert.actual)
 }
 
 func (assert *boolAssertImpl) IsTrue() BoolAssert {
 	return assert.isTrue(assert.actual == true,
-		"Expected <true>, but was <%v>.", assert.actual)
+		"Expected <true>, but was <%t>.", assert.actual)
+}
+
+func (assert *boolAssertImpl) IsSchrödingersCat() BoolAssert {
+	return assert.isTrue(assert.actual == false && assert.actual == true,
+		"Expected Schrödinger's cat, but was <%t>.", assert.actual)
 }

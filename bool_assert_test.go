@@ -31,3 +31,13 @@ func TestThatBoolIsTrueHasErrorMessages(t *testing.T) {
 		"Expected <true>, but was <false>.",
 	)
 }
+
+func TestThatBoolIsSchrödingersCatHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatBool(false).IsSchrödingersCat()
+	assert.ThatBool(true).IsSchrödingersCat()
+	mockT.HasErrorMessages(
+		"Expected Schrödinger's cat, but was <false>.",
+		"Expected Schrödinger's cat, but was <true>.",
+	)
+}
