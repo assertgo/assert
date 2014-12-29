@@ -44,9 +44,20 @@ func (assert *anyTypeAssertImpl) AsBool() BoolAssert {
 }
 
 func (assert *anyTypeAssertImpl) AsInt() IntAssert {
-	if actual, ok := assert.actual.(int); ok {
+	switch actual := assert.actual.(type) {
+	case int:
 		return &intAssertImpl{assert.logFacade, actual}
-	} else {
+	case int8:
+		return &intAssertImpl{assert.logFacade, int(actual)}
+	case uint8:
+		return &intAssertImpl{assert.logFacade, int(actual)}
+	case int16:
+		return &intAssertImpl{assert.logFacade, int(actual)}
+	case uint16:
+		return &intAssertImpl{assert.logFacade, int(actual)}
+	case int32:
+		return &intAssertImpl{assert.logFacade, int(actual)}
+	default:
 		assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", assert.actual, assert.actual)
 		return &intAssertImpl{}
 	}

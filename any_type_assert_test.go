@@ -122,3 +122,15 @@ func TestThatAsStringHasErrorMessages(t *testing.T) {
 		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <string>.",
 	)
 }
+
+func TestThatAsIntCanAcceptOtherTypes(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(int8(-111)).AsInt()
+	assert.That(uint8(111)).AsInt()
+	assert.That(int16(-30000)).AsInt()
+	assert.That(uint16(65535)).AsInt()
+	assert.That(int32(10000000)).AsInt()
+	assert.That(byte(42)).AsInt()
+	assert.That(rune('A')).AsInt()
+	mockT.HasNoErrors()
+}
