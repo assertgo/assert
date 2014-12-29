@@ -135,10 +135,14 @@ func TestThatAsIntCanAcceptOtherTypes(t *testing.T) {
 	mockT.HasNoErrors()
 }
 
+type testCustomBool bool
 type testCustomInt int
+type testCustomString string
 
-func TestThatAsIntCanAcceptCustomTypes(t *testing.T) {
+func TestThatConvertionCanAcceptCustomTypes(t *testing.T) {
 	assert, mockT := setupWithMockT(t)
+	assert.That(testCustomBool(true)).AsBool()
 	assert.That(testCustomInt(6)).AsInt()
+	assert.That(testCustomString("custom string")).AsString()
 	mockT.HasNoErrors()
 }

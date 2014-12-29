@@ -35,8 +35,11 @@ func (assert *anyTypeAssertImpl) IsNotNil() AnyTypeAssert {
 }
 
 func (assert *anyTypeAssertImpl) AsBool() BoolAssert {
-	if actual, ok := assert.actual.(bool); ok {
-		return &boolAssertImpl{assert.logFacade, actual}
+	if assert.actual != nil {
+		val, kind := valueWithKind(assert.actual)
+		if kind == reflect.Bool {
+			return &boolAssertImpl{assert.logFacade, val.Bool()}
+		}
 	}
 	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <bool>.", assert.actual, assert.actual)
 	return &boolAssertImpl{}
@@ -44,8 +47,7 @@ func (assert *anyTypeAssertImpl) AsBool() BoolAssert {
 
 func (assert *anyTypeAssertImpl) AsInt() IntAssert {
 	if assert.actual != nil {
-		val := reflect.ValueOf(assert.actual)
-		kind := val.Type().Kind()
+		val, kind := valueWithKind(assert.actual)
 		if kind == reflect.Int || kind == reflect.Int8 || kind == reflect.Int16 || kind == reflect.Int32 {
 			return &intAssertImpl{assert.logFacade, int(val.Int())}
 		} else if kind == reflect.Uint8 || kind == reflect.Uint16 {
@@ -57,9 +59,18 @@ func (assert *anyTypeAssertImpl) AsInt() IntAssert {
 }
 
 func (assert *anyTypeAssertImpl) AsString() StringAssert {
-	if actual, ok := assert.actual.(string); ok {
-		return &stringAssertImpl{assert.logFacade, actual}
+	if assert.actual != nil {
+		val, kind := valueWithKind(assert.actual)
+		if kind == reflect.String {
+			return &stringAssertImpl{assert.logFacade, val.String()}
+		}
 	}
 	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <string>.", assert.actual, assert.actual)
 	return &stringAssertImpl{}
+}
+
+func valueWithKind(data interface{}) (val reflect.Value, kind reflect.Kind) {
+	val = reflect.ValueOf(data)
+	kind = val.Type().Kind()
+	return
 }
