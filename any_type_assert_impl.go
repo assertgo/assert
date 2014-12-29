@@ -39,7 +39,7 @@ func (assert *anyTypeAssertImpl) AsBool() BoolAssert {
 		return &boolAssertImpl{assert.logFacade, actual}
 	} else {
 		assert.isTrue(false, "Cannot convert <%v> of type <%T> to <bool>.", assert.actual, assert.actual)
-		return &dummyBoolAssertImpl{}
+		return &boolAssertImpl{}
 	}
 }
 
@@ -48,7 +48,7 @@ func (assert *anyTypeAssertImpl) AsInt() IntAssert {
 		return &intAssertImpl{assert.logFacade, actual}
 	} else {
 		assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", assert.actual, assert.actual)
-		return &dummyIntAssertImpl{}
+		return &intAssertImpl{}
 	}
 }
 
@@ -57,6 +57,6 @@ func (assert *anyTypeAssertImpl) AsString() StringAssert {
 		return &stringAssertImpl{assert.logFacade, actual}
 	} else {
 		assert.isTrue(false, "Cannot convert <%v> of type <%T> to <string>.", assert.actual, assert.actual)
-		return &dummyStringAssertImpl{}
+		return &stringAssertImpl{}
 	}
 }

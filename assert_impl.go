@@ -32,7 +32,7 @@ func (assertProvider *assertProviderImpl) ThatBool(actual bool) BoolAssert {
 }
 
 func logIfFalse(logFacade *logFacade, condition bool, format string, args ...interface{}) {
-	if !condition {
+	if logFacade != nil && !condition {
 		location := provideLocation(3)
 		message := fmt.Sprintf(format, args...)
 		logFacade.Log(location, message)
