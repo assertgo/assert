@@ -48,9 +48,10 @@ func (assert *anyTypeAssertImpl) AsBool() BoolAssert {
 func (assert *anyTypeAssertImpl) AsInt() IntAssert {
 	if assert.actual != nil {
 		val, kind := valueWithKind(assert.actual)
-		if kind == reflect.Int || kind == reflect.Int8 || kind == reflect.Int16 || kind == reflect.Int32 {
+		switch kind {
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32:
 			return &intAssertImpl{assert.logFacade, int(val.Int())}
-		} else if kind == reflect.Uint8 || kind == reflect.Uint16 {
+		case reflect.Uint8, reflect.Uint16:
 			return &intAssertImpl{assert.logFacade, int(val.Uint())}
 		}
 	}
