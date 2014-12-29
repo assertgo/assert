@@ -134,3 +134,11 @@ func TestThatAsIntCanAcceptOtherTypes(t *testing.T) {
 	assert.That(rune('A')).AsInt()
 	mockT.HasNoErrors()
 }
+
+type testCustomInt int
+
+func TestThatAsIntCanAcceptCustomTypes(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(testCustomInt(6)).AsInt()
+	mockT.HasNoErrors()
+}

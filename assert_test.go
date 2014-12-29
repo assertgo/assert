@@ -27,7 +27,7 @@ func (mockT *mockTestingT) Fail() {
 
 func (mockT *mockTestingT) HasNoErrors() {
 	if mockT.failed || len(mockT.errors) > 0 {
-		mockT.t.Errorf("Expected to have no errors, but had %d.", len(mockT.errors))
+		mockT.t.Errorf("Expected to have no errors, but had <%s>.", mockT.errors)
 	}
 }
 

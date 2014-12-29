@@ -44,23 +44,17 @@ func (assert *anyTypeAssertImpl) AsBool() BoolAssert {
 }
 
 func (assert *anyTypeAssertImpl) AsInt() IntAssert {
-	switch actual := assert.actual.(type) {
-	case int:
-		return &intAssertImpl{assert.logFacade, actual}
-	case int8:
-		return &intAssertImpl{assert.logFacade, int(actual)}
-	case uint8:
-		return &intAssertImpl{assert.logFacade, int(actual)}
-	case int16:
-		return &intAssertImpl{assert.logFacade, int(actual)}
-	case uint16:
-		return &intAssertImpl{assert.logFacade, int(actual)}
-	case int32:
-		return &intAssertImpl{assert.logFacade, int(actual)}
-	default:
-		assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", assert.actual, assert.actual)
-		return &intAssertImpl{}
+	if assert.actual != nil {
+		val := reflect.ValueOf(assert.actual)
+		kind := val.Type().Kind()
+		if kind == reflect.Int || kind == reflect.Int8 || kind == reflect.Int16 || kind == reflect.Int32 {
+			return &intAssertImpl{assert.logFacade, int(val.Int())}
+		} else if kind == reflect.Uint8 || kind == reflect.Uint16 {
+			return &intAssertImpl{assert.logFacade, int(val.Uint())}
+		}
 	}
+	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", assert.actual, assert.actual)
+	return &intAssertImpl{}
 }
 
 func (assert *anyTypeAssertImpl) AsString() StringAssert {
