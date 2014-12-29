@@ -35,43 +35,39 @@ func (assert *anyTypeAssertImpl) IsNotNil() AnyTypeAssert {
 }
 
 func (assert *anyTypeAssertImpl) AsBool() BoolAssert {
-	if assert.actual != nil {
-		val, kind := valueWithKind(assert.actual)
-		if kind == reflect.Bool {
-			return &boolAssertImpl{assert.logFacade, val.Bool()}
-		}
+	val, kind := valueWithKind(assert.actual)
+	if kind == reflect.Bool {
+		return &boolAssertImpl{assert.logFacade, val.Bool()}
 	}
 	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <bool>.", assert.actual, assert.actual)
 	return &boolAssertImpl{}
 }
 
 func (assert *anyTypeAssertImpl) AsInt() IntAssert {
-	if assert.actual != nil {
-		val, kind := valueWithKind(assert.actual)
-		switch kind {
-		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32:
-			return &intAssertImpl{assert.logFacade, int(val.Int())}
-		case reflect.Uint8, reflect.Uint16:
-			return &intAssertImpl{assert.logFacade, int(val.Uint())}
-		}
+	val, kind := valueWithKind(assert.actual)
+	switch kind {
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32:
+		return &intAssertImpl{assert.logFacade, int(val.Int())}
+	case reflect.Uint8, reflect.Uint16:
+		return &intAssertImpl{assert.logFacade, int(val.Uint())}
 	}
 	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", assert.actual, assert.actual)
 	return &intAssertImpl{}
 }
 
 func (assert *anyTypeAssertImpl) AsString() StringAssert {
-	if assert.actual != nil {
-		val, kind := valueWithKind(assert.actual)
-		if kind == reflect.String {
-			return &stringAssertImpl{assert.logFacade, val.String()}
-		}
+	val, kind := valueWithKind(assert.actual)
+	if kind == reflect.String {
+		return &stringAssertImpl{assert.logFacade, val.String()}
 	}
 	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <string>.", assert.actual, assert.actual)
 	return &stringAssertImpl{}
 }
 
 func valueWithKind(data interface{}) (val reflect.Value, kind reflect.Kind) {
-	val = reflect.ValueOf(data)
-	kind = val.Type().Kind()
+	if data != nil {
+		val = reflect.ValueOf(data)
+		kind = val.Type().Kind()
+	}
 	return
 }
