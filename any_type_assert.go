@@ -8,4 +8,9 @@ type AnyTypeAssert interface {
 	AsBool() BoolAssert
 	AsInt() IntAssert
 	AsString() StringAssert
+	// TODO
+	// AsInt64() Int64Assert
+	// AsUint64() Uint64Assert
+	// AsFloat() FloatAssert
+	// AsComplex() ComplexAssert
 }
