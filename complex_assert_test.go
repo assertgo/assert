@@ -17,3 +17,19 @@ func TestThatComplexIsZeroHasErrorMessages(t *testing.T) {
 		"Expected zero, but was <(0+1i)>.",
 	)
 }
+
+func TestThatComplexIsNonZeroHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatComplex(-1).IsNonZero()
+	assert.ThatComplex(1i).IsNonZero()
+	mockT.HasNoErrors()
+}
+
+func TestThatComplexIsNonZeroHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatComplex(complex(0, 0)).IsNonZero().IsNonZero()
+	mockT.HasErrorMessages(
+		"Expected nonzero, but was zero.",
+		"Expected nonzero, but was zero.",
+	)
+}

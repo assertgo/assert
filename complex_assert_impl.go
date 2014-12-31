@@ -14,3 +14,8 @@ func (assert *complexAssertImpl) IsZero() ComplexAssert {
 	return assert.isTrue(assert.actual == 0,
 		"Expected zero, but was <%v>.", assert.actual)
 }
+
+func (assert *complexAssertImpl) IsNonZero() ComplexAssert {
+	return assert.isTrue(assert.actual != 0,
+		"Expected nonzero, but was zero.")
+}
