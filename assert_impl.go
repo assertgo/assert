@@ -23,6 +23,10 @@ func (assertProvider *assertProviderImpl) ThatInt(actual int) IntAssert {
 	return &intAssertImpl{assertProvider.logFacade, actual}
 }
 
+func (assertProvider *assertProviderImpl) ThatComplex(actual complex128) ComplexAssert {
+	return &complexAssertImpl{assertProvider.logFacade, actual}
+}
+
 func (assertProvider *assertProviderImpl) ThatString(actual string) StringAssert {
 	return &stringAssertImpl{assertProvider.logFacade, actual}
 }

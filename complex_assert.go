@@ -1,8 +1,8 @@
 package assert
 
-type complexAssert interface {
+type ComplexAssert interface {
+	IsZero() ComplexAssert
 	// TODO
-	// IsZero() ComplexAssert
 	// IsNonZero() ComplexAssert
 	// IsEqualTo(expected complex128) ComplexAssert
 	// IsNotEqualTo(unexpected complex128) ComplexAssert
