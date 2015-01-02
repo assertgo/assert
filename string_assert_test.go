@@ -170,3 +170,17 @@ func TestThatStringIsNotUpperCaseHasErrorMessages(t *testing.T) {
 		"Expected string <MARTA> to not be upper case, but was.",
 	)
 }
+
+func TestThatStringMatchesHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Ewelina").Matches("^Ewe(\\w+)")
+	mockT.HasNoErrors()
+}
+
+func TestThatStringMatchesHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatString("Ewelina").Matches("ewelin?")
+	mockT.HasErrorMessages(
+		"Expected string <Ewelina> to match <ewelin?>, but didn't.",
+	)
+}

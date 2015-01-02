@@ -13,8 +13,8 @@ type StringAssert interface {
 	IsNotLowerCase() StringAssert
 	IsUpperCase() StringAssert
 	IsNotUpperCase() StringAssert
+  Matches(pattern string) StringAssert
 	// TODO
-	// Matches(pattern string) StringAssert
 	// IsIn(elements ...string) StringAssert
 	// IsNotIn(elements ...string) StringAssert
 	// HasPrefix(prefix string) StringAssert
