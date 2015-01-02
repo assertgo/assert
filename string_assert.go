@@ -13,7 +13,7 @@ type StringAssert interface {
 	IsNotLowerCase() StringAssert
 	IsUpperCase() StringAssert
 	IsNotUpperCase() StringAssert
-  Matches(pattern string) StringAssert
+	Matches(pattern string) StringAssert
 	// TODO
 	// IsIn(elements ...string) StringAssert
 	// IsNotIn(elements ...string) StringAssert

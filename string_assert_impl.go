@@ -1,8 +1,8 @@
 package assert
 
 import (
-  "regexp"
-  "strings"
+	"regexp"
+	"strings"
 )
 
 type stringAssertImpl struct {
@@ -77,7 +77,7 @@ func (assert *stringAssertImpl) IsNotUpperCase() StringAssert {
 }
 
 func (assert *stringAssertImpl) Matches(pattern string) StringAssert {
-  matched, _ := regexp.MatchString(pattern, assert.actual)
+	matched, _ := regexp.MatchString(pattern, assert.actual)
 	return assert.isTrue(matched,
 		"Expected string <%s> to match <%s>, but didn't.", assert.actual, pattern)
 }
