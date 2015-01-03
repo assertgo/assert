@@ -7,7 +7,6 @@ before_install:
   - go get code.google.com/p/go.tools/cmd/cover
   - go get github.com/darkhelmet/manbearpig
 script:
-  - '[ "$TRAVIS_PULL_REQUEST" == "false" ] && goveralls -repotoken $coveralls_token || false'
-  - '[ "$TRAVIS_PULL_REQUEST" != "false" ] && go test || false'
+  - '[ "$TRAVIS_PULL_REQUEST" == "false" ] && goveralls -repotoken $coveralls_token || go test'
 after_script:
   - ./check_tests -v
