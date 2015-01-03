@@ -1,9 +1,9 @@
 package assert
 
-type floatAssert interface {
+type FloatAssert interface {
+	IsZero() FloatAssert
+	IsNonZero() FloatAssert
 	// TODO
-	// IsZero() FloatAssert
-	// IsNonZero() FloatAssert
 	// IsEqualTo(expected float64) FloatAssert
 	// IsNotEqualTo(unexpected float64) FloatAssert
 	// IsPositive() FloatAssert
