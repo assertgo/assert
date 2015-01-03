@@ -1,5 +1,5 @@
 assertgo ![](https://raw.githubusercontent.com/assertgo/icon/master/assertgo_64.png)
-========
+====================================================================================
 
 [![Build Status](https://travis-ci.org/assertgo/assert.svg?branch=develop)](https://travis-ci.org/assertgo/assert)
 [![Coverage Status](https://img.shields.io/coveralls/assertgo/assert.svg)](https://coveralls.io/r/assertgo/assert)
