@@ -23,6 +23,14 @@ func (assertProvider *assertProviderImpl) ThatInt(actual int) IntAssert {
 	return &intAssertImpl{assertProvider.logFacade, actual}
 }
 
+func (assertProvider *assertProviderImpl) ThatInt64(actual int64) Int64Assert {
+	return &int64AssertImpl{assertProvider.logFacade, actual}
+}
+
+func (assertProvider *assertProviderImpl) ThatUint64(actual uint64) Uint64Assert {
+	return &uint64AssertImpl{assertProvider.logFacade, actual}
+}
+
 func (assertProvider *assertProviderImpl) ThatFloat(actual float64) FloatAssert {
 	return &floatAssertImpl{assertProvider.logFacade, actual}
 }

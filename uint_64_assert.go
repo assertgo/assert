@@ -1,9 +1,9 @@
 package assert
 
-type uint64Assert interface {
+type Uint64Assert interface {
+	IsZero() Uint64Assert
+	IsNonZero() Uint64Assert
 	// TODO
-	// IsZero() Uint64Assert
-	// IsNonZero() Uint64Assert
 	// IsEqualTo(expected uint64) Uint64Assert
 	// IsNotEqualTo(unexpected uint64) Uint64Assert
 	// IsGreaterThan(less uint64) Uint64Assert

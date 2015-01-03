@@ -1,9 +1,9 @@
 package assert
 
-type int64Assert interface {
+type Int64Assert interface {
+	IsZero() Int64Assert
+	IsNonZero() Int64Assert
 	// TODO
-	// IsZero() Int64Assert
-	// IsNonZero() Int64Assert
 	// IsEqualTo(expected int64) Int64Assert
 	// IsNotEqualTo(unexpected int64) Int64Assert
 	// IsPositive() Int64Assert
