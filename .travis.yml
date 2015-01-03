@@ -7,6 +7,6 @@ before_install:
   - go get code.google.com/p/go.tools/cmd/cover
   - go get github.com/darkhelmet/manbearpig
 script:
-  - goveralls -repotoken uRYe7MrN9maQ6amzLvRwjTVFxonK9SFAj
+  - goveralls -repotoken $coveralls_token
 after_script:
   - ./check_tests -v
