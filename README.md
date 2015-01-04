@@ -1,11 +1,26 @@
-assertgo
-========
+assertgo ![](https://raw.githubusercontent.com/assertgo/icon/master/assertgo_64.png)
+====================================================================================
 
-[![Build Status](https://travis-ci.org/assertgo/assert.svg?branch=develop)](https://travis-ci.org/assertgo/assert) [![Coverage Status](https://coveralls.io/repos/assertgo/assert/badge.png?branch=develop)](https://coveralls.io/r/assertgo/assert?branch=develop)
+[![Build Status](https://travis-ci.org/assertgo/assert.svg?branch=develop)](https://travis-ci.org/assertgo/assert)
+[![Coverage Status](https://img.shields.io/coveralls/assertgo/assert.svg)](https://coveralls.io/r/assertgo/assert)
+[![GoDoc](https://godoc.org/github.com/assertgo/assert?status.svg)](https://godoc.org/github.com/assertgo/assert)
 
 The coolest assertion library for go language!
 
-Version: 1.0.0
+Version: 1.1.0
+
+Getting started
+---------------
+
+To get the package, execute:
+
+	go get github.com/assertgo/assert
+
+To import this package, add the following line to your code:
+
+	import "github.com/assertgo/assert"
+
+And just start using it.
 
 ```go
 func TestPerfectNumber(t *testing.T) {

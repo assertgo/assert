@@ -23,6 +23,22 @@ func (assertProvider *assertProviderImpl) ThatInt(actual int) IntAssert {
 	return &intAssertImpl{assertProvider.logFacade, actual}
 }
 
+func (assertProvider *assertProviderImpl) ThatInt64(actual int64) Int64Assert {
+	return &int64AssertImpl{assertProvider.logFacade, actual}
+}
+
+func (assertProvider *assertProviderImpl) ThatUint64(actual uint64) Uint64Assert {
+	return &uint64AssertImpl{assertProvider.logFacade, actual}
+}
+
+func (assertProvider *assertProviderImpl) ThatFloat(actual float64) FloatAssert {
+	return &floatAssertImpl{assertProvider.logFacade, actual}
+}
+
+func (assertProvider *assertProviderImpl) ThatComplex(actual complex128) ComplexAssert {
+	return &complexAssertImpl{assertProvider.logFacade, actual}
+}
+
 func (assertProvider *assertProviderImpl) ThatString(actual string) StringAssert {
 	return &stringAssertImpl{assertProvider.logFacade, actual}
 }
@@ -32,7 +48,7 @@ func (assertProvider *assertProviderImpl) ThatBool(actual bool) BoolAssert {
 }
 
 func logIfFalse(logFacade *logFacade, condition bool, format string, args ...interface{}) {
-	if !condition {
+	if logFacade != nil && !condition {
 		location := provideLocation(3)
 		message := fmt.Sprintf(format, args...)
 		logFacade.Log(location, message)

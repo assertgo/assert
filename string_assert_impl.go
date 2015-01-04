@@ -1,6 +1,9 @@
 package assert
 
-import "strings"
+import (
+	"regexp"
+	"strings"
+)
 
 type stringAssertImpl struct {
 	logFacade *logFacade
@@ -71,6 +74,12 @@ func (assert *stringAssertImpl) IsUpperCase() StringAssert {
 func (assert *stringAssertImpl) IsNotUpperCase() StringAssert {
 	return assert.isTrue(strings.ToUpper(assert.actual) != assert.actual,
 		"Expected string <%s> to not be upper case, but was.", assert.actual)
+}
+
+func (assert *stringAssertImpl) Matches(pattern string) StringAssert {
+	matched, _ := regexp.MatchString(pattern, assert.actual)
+	return assert.isTrue(matched,
+		"Expected string <%s> to match <%s>, but didn't.", assert.actual, pattern)
 }
 
 func stringIsInSlice(slice []string, expectedString string) bool {
