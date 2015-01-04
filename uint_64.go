@@ -14,3 +14,8 @@ func (a *Uint64) IsNonZero() *Uint64 {
 	return a.isTrue(a.actual != 0,
 		"Expected nonzero, but was zero.")
 }
+
+func (a *Uint64) isTrue(condition bool, format string, args ...interface{}) *Uint64 {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
+}

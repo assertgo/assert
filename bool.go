@@ -19,3 +19,8 @@ func (a *Bool) IsSchrödingersCat() *Bool {
 	return a.isTrue(a.actual == false && a.actual == true,
 		"Expected Schrödinger's cat, but was <%t>.", a.actual)
 }
+
+func (a *Bool) isTrue(condition bool, format string, args ...interface{}) *Bool {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
+}

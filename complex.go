@@ -14,3 +14,8 @@ func (a *Complex) IsNonZero() *Complex {
 	return a.isTrue(a.actual != 0,
 		"Expected nonzero, but was zero.")
 }
+
+func (a *Complex) isTrue(condition bool, format string, args ...interface{}) *Complex {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
+}
