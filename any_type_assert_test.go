@@ -106,6 +106,23 @@ func TestThatAsIntHasErrorMessages(t *testing.T) {
 	)
 }
 
+func TestThatAsInt64HasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(int64(0)).AsInt64().IsZero()
+	assert.That(int64(7)).AsInt64().IsNonZero()
+	mockT.HasNoErrors()
+}
+
+func TestThatAsInt64HasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("NO!").AsInt64()
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).AsInt64()
+	mockT.HasErrorMessages(
+		"Cannot convert <NO!> of type <string> to <int64>.",
+		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <int64>.",
+	)
+}
+
 func TestThatAsStringHasNoErrors(t *testing.T) {
 	assert, mockT := setupWithMockT(t)
 	assert.That("").AsString().IsEmpty()

@@ -55,6 +55,15 @@ func (assert *anyTypeAssertImpl) AsInt() IntAssert {
 	return &intAssertImpl{}
 }
 
+func (assert *anyTypeAssertImpl) AsInt64() Int64Assert {
+	val, kind := valueWithKind(assert.actual)
+	if kind == reflect.Int64 {
+		return &int64AssertImpl{assert.logFacade, val.Int()}
+	}
+	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int64>.", assert.actual, assert.actual)
+	return &int64AssertImpl{}
+}
+
 func (assert *anyTypeAssertImpl) AsString() StringAssert {
 	val, kind := valueWithKind(assert.actual)
 	if kind == reflect.String {
