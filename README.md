@@ -7,7 +7,7 @@ assertgo ![](https://raw.githubusercontent.com/assertgo/icon/master/assertgo_64.
 
 The coolest assertion library for go language!
 
-Version: 1.0.0
+Version: 1.1.0
 
 Getting started
 ---------------
