@@ -135,6 +135,92 @@ func TestThatAsInt64CanAcceptOtherTypes(t *testing.T) {
 	mockT.HasNoErrors()
 }
 
+func TestThatAsUint64HasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(uint64(0)).AsUint64().IsZero()
+	assert.That(uint64(7)).AsUint64().IsNonZero()
+	mockT.HasNoErrors()
+}
+
+func TestThatAsUint64HasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("NO!").AsUint64()
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).AsUint64()
+	mockT.HasErrorMessages(
+		"Cannot convert <NO!> of type <string> to <uint64>.",
+		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <uint64>.",
+	)
+}
+
+func TestThatAsUint64CanAcceptOtherTypes(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(uint8(111)).AsUint64()
+	assert.That(uint16(65535)).AsUint64()
+	assert.That(uint32(10000000)).AsUint64()
+	assert.That(uint(2147483648)).AsUint64()
+	mockT.HasNoErrors()
+}
+
+func TestThatAsFloatHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(0.0).AsFloat().IsZero()
+	assert.That(float64(-1)).AsFloat().IsNonZero()
+	mockT.HasNoErrors()
+}
+
+func TestThatAsFloatHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("NO!").AsFloat()
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).AsFloat()
+	mockT.HasErrorMessages(
+		"Cannot convert <NO!> of type <string> to <float64>.",
+		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <float64>.",
+	)
+}
+
+func TestThatAsFloatCanAcceptOtherTypes(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(float32(-44.44)).AsFloat()
+	assert.That(int8(-111)).AsFloat()
+	assert.That(int16(-32768)).AsFloat()
+	assert.That(int32(-10000000)).AsFloat()
+	assert.That(uint8(111)).AsFloat()
+	assert.That(uint16(65535)).AsFloat()
+	assert.That(uint32(10000000)).AsFloat()
+	mockT.HasNoErrors()
+}
+
+func TestThatAsComplexHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(complex(0, 0)).AsComplex().IsZero()
+	assert.That(-2i).AsComplex().IsNonZero()
+	mockT.HasNoErrors()
+}
+
+func TestThatAsComplexHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That("NO!").AsComplex()
+	assert.That(&location{"TestFoo", "foo_test.go", 66}).AsComplex()
+	mockT.HasErrorMessages(
+		"Cannot convert <NO!> of type <string> to <complex128>.",
+		"Cannot convert <&{TestFoo foo_test.go 66}> of type <*assert.location> to <complex128>.",
+	)
+}
+
+func TestThatAsComplexCanAcceptOtherTypes(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(complex(float32(1.1), float32(-1.1))).AsComplex()
+	assert.That(float32(-44.44)).AsComplex()
+	assert.That(float64(555.555)).AsComplex()
+	assert.That(int8(-111)).AsComplex()
+	assert.That(int16(-32768)).AsComplex()
+	assert.That(int32(-10000000)).AsComplex()
+	assert.That(uint8(111)).AsComplex()
+	assert.That(uint16(65535)).AsComplex()
+	assert.That(uint32(10000000)).AsComplex()
+	mockT.HasNoErrors()
+}
+
 func TestThatAsStringHasNoErrors(t *testing.T) {
 	assert, mockT := setupWithMockT(t)
 	assert.That("").AsString().IsEmpty()
