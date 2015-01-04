@@ -1,21 +1,21 @@
 package assert
 
-type floatAssertImpl struct {
+type FloatAssert struct {
 	logFacade *logFacade
 	actual    float64
 }
 
-func (assert *floatAssertImpl) isTrue(condition bool, format string, args ...interface{}) *floatAssertImpl {
+func (assert *FloatAssert) isTrue(condition bool, format string, args ...interface{}) *FloatAssert {
 	logIfFalse(assert.logFacade, condition, format, args...)
 	return assert
 }
 
-func (assert *floatAssertImpl) IsZero() FloatAssert {
+func (assert *FloatAssert) IsZero() *FloatAssert {
 	return assert.isTrue(assert.actual == 0,
 		"Expected zero, but was <%v>.", assert.actual)
 }
 
-func (assert *floatAssertImpl) IsNonZero() FloatAssert {
+func (assert *FloatAssert) IsNonZero() *FloatAssert {
 	return assert.isTrue(assert.actual != 0,
 		"Expected nonzero, but was zero.")
 }

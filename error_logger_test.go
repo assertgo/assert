@@ -63,7 +63,7 @@ func TestErrorLoggerDifferentFileSameLine(t *testing.T) {
 			"\t\tExpected Second?\n")
 }
 
-func setupWithLogger(t *testing.T) (assert AssertProvider, buffer *bytes.Buffer, logger errorLogger) {
+func setupWithLogger(t *testing.T) (assert *AssertProvider, buffer *bytes.Buffer, logger errorLogger) {
 	assert = Setup(t)
 	buffer = &bytes.Buffer{}
 	logger = &errorLoggerImpl{writer: buffer}

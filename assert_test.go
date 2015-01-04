@@ -11,7 +11,7 @@ type mockTestingT struct {
 	errors []string
 }
 
-func setupWithMockT(t *testing.T) (assert AssertProvider, mockT *mockTestingT) {
+func setupWithMockT(t *testing.T) (assert *AssertProvider, mockT *mockTestingT) {
 	mockT = &mockTestingT{t: t}
 	assert = setupImpl(mockT, mockT)
 	return
