@@ -4,6 +4,6 @@ type TestingT interface {
 	Fail()
 }
 
-func Setup(t TestingT) *AssertProvider {
+func Setup(t TestingT) *Provider {
 	return setupImpl(t, theLogger)
 }

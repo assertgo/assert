@@ -5,81 +5,81 @@ import (
 	"strings"
 )
 
-type StringAssert struct {
+type String struct {
 	logFacade *logFacade
 	actual    string
 }
 
-func (assert *StringAssert) isTrue(condition bool, format string, args ...interface{}) *StringAssert {
-	logIfFalse(assert.logFacade, condition, format, args...)
-	return assert
+func (a *String) isTrue(condition bool, format string, args ...interface{}) *String {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
 }
 
-func (assert *StringAssert) IsEqualTo(expected string) *StringAssert {
-	return assert.isTrue(assert.actual == expected,
-		"Expected <%s>, but was <%s>.", expected, assert.actual)
+func (a *String) IsEqualTo(expected string) *String {
+	return a.isTrue(a.actual == expected,
+		"Expected <%s>, but was <%s>.", expected, a.actual)
 }
 
-func (assert *StringAssert) IsNotEqualTo(unexpected string) *StringAssert {
-	return assert.isTrue(assert.actual != unexpected,
+func (a *String) IsNotEqualTo(unexpected string) *String {
+	return a.isTrue(a.actual != unexpected,
 		"Expected string not equal to <%s>, but was equal.", unexpected)
 }
 
-func (assert *StringAssert) IsEmpty() *StringAssert {
-	return assert.isTrue(assert.actual == "",
-		"Expected string to be empty, but was <%s>.", assert.actual)
+func (a *String) IsEmpty() *String {
+	return a.isTrue(a.actual == "",
+		"Expected string to be empty, but was <%s>.", a.actual)
 }
 
-func (assert *StringAssert) IsNotEmpty() *StringAssert {
-	return assert.isTrue(assert.actual != "",
+func (a *String) IsNotEmpty() *String {
+	return a.isTrue(a.actual != "",
 		"Expected string to not be empty, but was.",
 	)
 }
 
-func (assert *StringAssert) IsInSlice(expectedSlice []string) *StringAssert {
-	return assert.isTrue(stringIsInSlice(expectedSlice, assert.actual),
+func (a *String) IsInSlice(expectedSlice []string) *String {
+	return a.isTrue(stringIsInSlice(expectedSlice, a.actual),
 		"Expected string to be in slice <%v>, but wasn't.", expectedSlice)
 }
 
-func (assert *StringAssert) IsNotInSlice(expectedSlice []string) *StringAssert {
-	return assert.isTrue(!stringIsInSlice(expectedSlice, assert.actual),
+func (a *String) IsNotInSlice(expectedSlice []string) *String {
+	return a.isTrue(!stringIsInSlice(expectedSlice, a.actual),
 		"Expected string to not be in slice <%v>, but was.", expectedSlice)
 }
 
-func (assert *StringAssert) Contains(substring string) *StringAssert {
-	return assert.isTrue(strings.Contains(assert.actual, substring),
-		"Expected string <%s> to contain <%s>, but didn't.", assert.actual, substring)
+func (a *String) Contains(substring string) *String {
+	return a.isTrue(strings.Contains(a.actual, substring),
+		"Expected string <%s> to contain <%s>, but didn't.", a.actual, substring)
 }
 
-func (assert *StringAssert) DoesNotContain(substring string) *StringAssert {
-	return assert.isTrue(!strings.Contains(assert.actual, substring),
-		"Expected string <%s> to not contain <%s>, but it did.", assert.actual, substring)
+func (a *String) DoesNotContain(substring string) *String {
+	return a.isTrue(!strings.Contains(a.actual, substring),
+		"Expected string <%s> to not contain <%s>, but it did.", a.actual, substring)
 }
 
-func (assert *StringAssert) IsLowerCase() *StringAssert {
-	return assert.isTrue(strings.ToLower(assert.actual) == assert.actual,
-		"Expected string <%s> to be lower case, but wasn't.", assert.actual)
+func (a *String) IsLowerCase() *String {
+	return a.isTrue(strings.ToLower(a.actual) == a.actual,
+		"Expected string <%s> to be lower case, but wasn't.", a.actual)
 }
 
-func (assert *StringAssert) IsNotLowerCase() *StringAssert {
-	return assert.isTrue(strings.ToLower(assert.actual) != assert.actual,
-		"Expected string <%s> to not be lower case, but was.", assert.actual)
+func (a *String) IsNotLowerCase() *String {
+	return a.isTrue(strings.ToLower(a.actual) != a.actual,
+		"Expected string <%s> to not be lower case, but was.", a.actual)
 }
 
-func (assert *StringAssert) IsUpperCase() *StringAssert {
-	return assert.isTrue(strings.ToUpper(assert.actual) == assert.actual,
-		"Expected string <%s> to be upper case, but wasn't.", assert.actual)
+func (a *String) IsUpperCase() *String {
+	return a.isTrue(strings.ToUpper(a.actual) == a.actual,
+		"Expected string <%s> to be upper case, but wasn't.", a.actual)
 }
 
-func (assert *StringAssert) IsNotUpperCase() *StringAssert {
-	return assert.isTrue(strings.ToUpper(assert.actual) != assert.actual,
-		"Expected string <%s> to not be upper case, but was.", assert.actual)
+func (a *String) IsNotUpperCase() *String {
+	return a.isTrue(strings.ToUpper(a.actual) != a.actual,
+		"Expected string <%s> to not be upper case, but was.", a.actual)
 }
 
-func (assert *StringAssert) Matches(pattern string) *StringAssert {
-	matched, _ := regexp.MatchString(pattern, assert.actual)
-	return assert.isTrue(matched,
-		"Expected string <%s> to match <%s>, but didn't.", assert.actual, pattern)
+func (a *String) Matches(pattern string) *String {
+	matched, _ := regexp.MatchString(pattern, a.actual)
+	return a.isTrue(matched,
+		"Expected string <%s> to match <%s>, but didn't.", a.actual, pattern)
 }
 
 func stringIsInSlice(slice []string, expectedString string) bool {

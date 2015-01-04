@@ -2,7 +2,7 @@ package assert
 
 import "fmt"
 
-type AssertProvider struct {
+type Provider struct {
 	logFacade *logFacade
 }
 
@@ -11,40 +11,40 @@ type logFacade struct {
 	logger errorLogger
 }
 
-func setupImpl(t TestingT, logger errorLogger) *AssertProvider {
-	return &AssertProvider{&logFacade{t, logger}}
+func setupImpl(t TestingT, logger errorLogger) *Provider {
+	return &Provider{&logFacade{t, logger}}
 }
 
-func (assertProvider *AssertProvider) That(actual interface{}) *AnyTypeAssert {
-	return &AnyTypeAssert{assertProvider.logFacade, actual}
+func (p *Provider) That(actual interface{}) *AnyType {
+	return &AnyType{p.logFacade, actual}
 }
 
-func (assertProvider *AssertProvider) ThatInt(actual int) *IntAssert {
-	return &IntAssert{assertProvider.logFacade, actual}
+func (p *Provider) ThatInt(actual int) *Int {
+	return &Int{p.logFacade, actual}
 }
 
-func (assertProvider *AssertProvider) ThatInt64(actual int64) *Int64Assert {
-	return &Int64Assert{assertProvider.logFacade, actual}
+func (p *Provider) ThatInt64(actual int64) *Int64 {
+	return &Int64{p.logFacade, actual}
 }
 
-func (assertProvider *AssertProvider) ThatUint64(actual uint64) *Uint64Assert {
-	return &Uint64Assert{assertProvider.logFacade, actual}
+func (p *Provider) ThatUint64(actual uint64) *Uint64 {
+	return &Uint64{p.logFacade, actual}
 }
 
-func (assertProvider *AssertProvider) ThatFloat(actual float64) *FloatAssert {
-	return &FloatAssert{assertProvider.logFacade, actual}
+func (p *Provider) ThatFloat(actual float64) *Float {
+	return &Float{p.logFacade, actual}
 }
 
-func (assertProvider *AssertProvider) ThatComplex(actual complex128) *ComplexAssert {
-	return &ComplexAssert{assertProvider.logFacade, actual}
+func (p *Provider) ThatComplex(actual complex128) *Complex {
+	return &Complex{p.logFacade, actual}
 }
 
-func (assertProvider *AssertProvider) ThatString(actual string) *StringAssert {
-	return &StringAssert{assertProvider.logFacade, actual}
+func (p *Provider) ThatString(actual string) *String {
+	return &String{p.logFacade, actual}
 }
 
-func (assertProvider *AssertProvider) ThatBool(actual bool) *BoolAssert {
-	return &BoolAssert{assertProvider.logFacade, actual}
+func (p *Provider) ThatBool(actual bool) *Bool {
+	return &Bool{p.logFacade, actual}
 }
 
 func logIfFalse(logFacade *logFacade, condition bool, format string, args ...interface{}) {

@@ -1,26 +1,26 @@
 package assert
 
-type BoolAssert struct {
+type Bool struct {
 	logFacade *logFacade
 	actual    bool
 }
 
-func (assert *BoolAssert) isTrue(condition bool, format string, args ...interface{}) *BoolAssert {
-	logIfFalse(assert.logFacade, condition, format, args...)
-	return assert
+func (a *Bool) isTrue(condition bool, format string, args ...interface{}) *Bool {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
 }
 
-func (assert *BoolAssert) IsFalse() *BoolAssert {
-	return assert.isTrue(assert.actual == false,
-		"Expected <false>, but was <%t>.", assert.actual)
+func (a *Bool) IsFalse() *Bool {
+	return a.isTrue(a.actual == false,
+		"Expected <false>, but was <%t>.", a.actual)
 }
 
-func (assert *BoolAssert) IsTrue() *BoolAssert {
-	return assert.isTrue(assert.actual == true,
-		"Expected <true>, but was <%t>.", assert.actual)
+func (a *Bool) IsTrue() *Bool {
+	return a.isTrue(a.actual == true,
+		"Expected <true>, but was <%t>.", a.actual)
 }
 
-func (assert *BoolAssert) IsSchrödingersCat() *BoolAssert {
-	return assert.isTrue(assert.actual == false && assert.actual == true,
-		"Expected Schrödinger's cat, but was <%t>.", assert.actual)
+func (a *Bool) IsSchrödingersCat() *Bool {
+	return a.isTrue(a.actual == false && a.actual == true,
+		"Expected Schrödinger's cat, but was <%t>.", a.actual)
 }

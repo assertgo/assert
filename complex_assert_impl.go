@@ -1,21 +1,21 @@
 package assert
 
-type ComplexAssert struct {
+type Complex struct {
 	logFacade *logFacade
 	actual    complex128
 }
 
-func (assert *ComplexAssert) isTrue(condition bool, format string, args ...interface{}) *ComplexAssert {
-	logIfFalse(assert.logFacade, condition, format, args...)
-	return assert
+func (a *Complex) isTrue(condition bool, format string, args ...interface{}) *Complex {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
 }
 
-func (assert *ComplexAssert) IsZero() *ComplexAssert {
-	return assert.isTrue(assert.actual == 0,
-		"Expected zero, but was <%v>.", assert.actual)
+func (a *Complex) IsZero() *Complex {
+	return a.isTrue(a.actual == 0,
+		"Expected zero, but was <%v>.", a.actual)
 }
 
-func (assert *ComplexAssert) IsNonZero() *ComplexAssert {
-	return assert.isTrue(assert.actual != 0,
+func (a *Complex) IsNonZero() *Complex {
+	return a.isTrue(a.actual != 0,
 		"Expected nonzero, but was zero.")
 }

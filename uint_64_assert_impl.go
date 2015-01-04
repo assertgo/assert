@@ -1,21 +1,21 @@
 package assert
 
-type Uint64Assert struct {
+type Uint64 struct {
 	logFacade *logFacade
 	actual    uint64
 }
 
-func (assert *Uint64Assert) isTrue(condition bool, format string, args ...interface{}) *Uint64Assert {
-	logIfFalse(assert.logFacade, condition, format, args...)
-	return assert
+func (a *Uint64) isTrue(condition bool, format string, args ...interface{}) *Uint64 {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
 }
 
-func (assert *Uint64Assert) IsZero() *Uint64Assert {
-	return assert.isTrue(assert.actual == 0,
-		"Expected zero, but was <%v>.", assert.actual)
+func (a *Uint64) IsZero() *Uint64 {
+	return a.isTrue(a.actual == 0,
+		"Expected zero, but was <%v>.", a.actual)
 }
 
-func (assert *Uint64Assert) IsNonZero() *Uint64Assert {
-	return assert.isTrue(assert.actual != 0,
+func (a *Uint64) IsNonZero() *Uint64 {
+	return a.isTrue(a.actual != 0,
 		"Expected nonzero, but was zero.")
 }

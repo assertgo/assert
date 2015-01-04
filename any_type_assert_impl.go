@@ -4,116 +4,116 @@ import (
 	"reflect"
 )
 
-type AnyTypeAssert struct {
+type AnyType struct {
 	logFacade *logFacade
 	actual    interface{}
 }
 
-func (assert *AnyTypeAssert) isTrue(condition bool, format string, args ...interface{}) *AnyTypeAssert {
-	logIfFalse(assert.logFacade, condition, format, args...)
-	return assert
+func (a *AnyType) isTrue(condition bool, format string, args ...interface{}) *AnyType {
+	logIfFalse(a.logFacade, condition, format, args...)
+	return a
 }
 
-func (assert *AnyTypeAssert) IsEqualTo(expected interface{}) *AnyTypeAssert {
-	return assert.isTrue(reflect.DeepEqual(assert.actual, expected),
-		"Expected <%v>, but was <%v>.", expected, assert.actual)
+func (a *AnyType) IsEqualTo(expected interface{}) *AnyType {
+	return a.isTrue(reflect.DeepEqual(a.actual, expected),
+		"Expected <%v>, but was <%v>.", expected, a.actual)
 }
 
-func (assert *AnyTypeAssert) IsNotEqualTo(expected interface{}) *AnyTypeAssert {
-	return assert.isTrue(!reflect.DeepEqual(assert.actual, expected),
+func (a *AnyType) IsNotEqualTo(expected interface{}) *AnyType {
+	return a.isTrue(!reflect.DeepEqual(a.actual, expected),
 		"Expected value not equal to <%v>, but was equal.", expected)
 }
 
-func (assert *AnyTypeAssert) IsNil() *AnyTypeAssert {
-	return assert.isTrue(assert.actual == nil,
-		"Expected value to be nil, but was <%v>.", assert.actual)
+func (a *AnyType) IsNil() *AnyType {
+	return a.isTrue(a.actual == nil,
+		"Expected value to be nil, but was <%v>.", a.actual)
 }
 
-func (assert *AnyTypeAssert) IsNotNil() *AnyTypeAssert {
-	return assert.isTrue(assert.actual != nil,
+func (a *AnyType) IsNotNil() *AnyType {
+	return a.isTrue(a.actual != nil,
 		"Expected value not to be nil, but was.")
 }
 
-func (assert *AnyTypeAssert) AsBool() *BoolAssert {
-	val, kind := valueWithKind(assert.actual)
+func (a *AnyType) AsBool() *Bool {
+	val, kind := valueWithKind(a.actual)
 	if kind == reflect.Bool {
-		return &BoolAssert{assert.logFacade, val.Bool()}
+		return &Bool{a.logFacade, val.Bool()}
 	}
-	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <bool>.", assert.actual, assert.actual)
-	return &BoolAssert{}
+	a.isTrue(false, "Cannot convert <%v> of type <%T> to <bool>.", a.actual, a.actual)
+	return &Bool{}
 }
 
-func (assert *AnyTypeAssert) AsInt() *IntAssert {
-	val, kind := valueWithKind(assert.actual)
+func (a *AnyType) AsInt() *Int {
+	val, kind := valueWithKind(a.actual)
 	switch kind {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32:
-		return &IntAssert{assert.logFacade, int(val.Int())}
+		return &Int{a.logFacade, int(val.Int())}
 	case reflect.Uint8, reflect.Uint16:
-		return &IntAssert{assert.logFacade, int(val.Uint())}
+		return &Int{a.logFacade, int(val.Uint())}
 	}
-	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", assert.actual, assert.actual)
-	return &IntAssert{}
+	a.isTrue(false, "Cannot convert <%v> of type <%T> to <int>.", a.actual, a.actual)
+	return &Int{}
 }
 
-func (assert *AnyTypeAssert) AsInt64() *Int64Assert {
-	val, kind := valueWithKind(assert.actual)
+func (a *AnyType) AsInt64() *Int64 {
+	val, kind := valueWithKind(a.actual)
 	switch kind {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		return &Int64Assert{assert.logFacade, val.Int()}
+		return &Int64{a.logFacade, val.Int()}
 	case reflect.Uint8, reflect.Uint16, reflect.Uint32:
-		return &Int64Assert{assert.logFacade, int64(val.Uint())}
+		return &Int64{a.logFacade, int64(val.Uint())}
 	}
-	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int64>.", assert.actual, assert.actual)
-	return &Int64Assert{}
+	a.isTrue(false, "Cannot convert <%v> of type <%T> to <int64>.", a.actual, a.actual)
+	return &Int64{}
 }
 
-func (assert *AnyTypeAssert) AsUint64() *Uint64Assert {
-	val, kind := valueWithKind(assert.actual)
+func (a *AnyType) AsUint64() *Uint64 {
+	val, kind := valueWithKind(a.actual)
 	switch kind {
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		return &Uint64Assert{assert.logFacade, val.Uint()}
+		return &Uint64{a.logFacade, val.Uint()}
 	}
-	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <uint64>.", assert.actual, assert.actual)
-	return &Uint64Assert{}
+	a.isTrue(false, "Cannot convert <%v> of type <%T> to <uint64>.", a.actual, a.actual)
+	return &Uint64{}
 }
 
-func (assert *AnyTypeAssert) AsFloat() *FloatAssert {
-	val, kind := valueWithKind(assert.actual)
+func (a *AnyType) AsFloat() *Float {
+	val, kind := valueWithKind(a.actual)
 	switch kind {
 	case reflect.Float32, reflect.Float64:
-		return &FloatAssert{assert.logFacade, val.Float()}
+		return &Float{a.logFacade, val.Float()}
 	case reflect.Int8, reflect.Int16, reflect.Int32:
-		return &FloatAssert{assert.logFacade, float64(val.Int())}
+		return &Float{a.logFacade, float64(val.Int())}
 	case reflect.Uint8, reflect.Uint16, reflect.Uint32:
-		return &FloatAssert{assert.logFacade, float64(val.Uint())}
+		return &Float{a.logFacade, float64(val.Uint())}
 	}
-	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <float64>.", assert.actual, assert.actual)
-	return &FloatAssert{}
+	a.isTrue(false, "Cannot convert <%v> of type <%T> to <float64>.", a.actual, a.actual)
+	return &Float{}
 }
 
-func (assert *AnyTypeAssert) AsComplex() *ComplexAssert {
-	val, kind := valueWithKind(assert.actual)
+func (a *AnyType) AsComplex() *Complex {
+	val, kind := valueWithKind(a.actual)
 	switch kind {
 	case reflect.Complex64, reflect.Complex128:
-		return &ComplexAssert{assert.logFacade, val.Complex()}
+		return &Complex{a.logFacade, val.Complex()}
 	case reflect.Float32, reflect.Float64:
-		return &ComplexAssert{assert.logFacade, complex(val.Float(), 0)}
+		return &Complex{a.logFacade, complex(val.Float(), 0)}
 	case reflect.Int8, reflect.Int16, reflect.Int32:
-		return &ComplexAssert{assert.logFacade, complex(float64(val.Int()), 0)}
+		return &Complex{a.logFacade, complex(float64(val.Int()), 0)}
 	case reflect.Uint8, reflect.Uint16, reflect.Uint32:
-		return &ComplexAssert{assert.logFacade, complex(float64(val.Uint()), 0)}
+		return &Complex{a.logFacade, complex(float64(val.Uint()), 0)}
 	}
-	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <complex128>.", assert.actual, assert.actual)
-	return &ComplexAssert{}
+	a.isTrue(false, "Cannot convert <%v> of type <%T> to <complex128>.", a.actual, a.actual)
+	return &Complex{}
 }
 
-func (assert *AnyTypeAssert) AsString() *StringAssert {
-	val, kind := valueWithKind(assert.actual)
+func (a *AnyType) AsString() *String {
+	val, kind := valueWithKind(a.actual)
 	if kind == reflect.String {
-		return &StringAssert{assert.logFacade, val.String()}
+		return &String{a.logFacade, val.String()}
 	}
-	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <string>.", assert.actual, assert.actual)
-	return &StringAssert{}
+	a.isTrue(false, "Cannot convert <%v> of type <%T> to <string>.", a.actual, a.actual)
+	return &String{}
 }
 
 func valueWithKind(data interface{}) (val reflect.Value, kind reflect.Kind) {
