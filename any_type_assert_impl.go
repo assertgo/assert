@@ -57,8 +57,11 @@ func (assert *anyTypeAssertImpl) AsInt() IntAssert {
 
 func (assert *anyTypeAssertImpl) AsInt64() Int64Assert {
 	val, kind := valueWithKind(assert.actual)
-	if kind == reflect.Int64 {
+	switch kind {
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 		return &int64AssertImpl{assert.logFacade, val.Int()}
+	case reflect.Uint8, reflect.Uint16, reflect.Uint32:
+		return &int64AssertImpl{assert.logFacade, int64(val.Uint())}
 	}
 	assert.isTrue(false, "Cannot convert <%v> of type <%T> to <int64>.", assert.actual, assert.actual)
 	return &int64AssertImpl{}

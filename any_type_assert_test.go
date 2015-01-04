@@ -123,6 +123,18 @@ func TestThatAsInt64HasErrorMessages(t *testing.T) {
 	)
 }
 
+func TestThatAsInt64CanAcceptOtherTypes(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.That(int8(-111)).AsInt64()
+	assert.That(uint8(111)).AsInt64()
+	assert.That(int16(-30000)).AsInt64()
+	assert.That(uint16(65535)).AsInt64()
+	assert.That(int32(-10000000)).AsInt64()
+	assert.That(uint32(10000000)).AsInt64()
+	assert.That(2147483647).AsInt64()
+	mockT.HasNoErrors()
+}
+
 func TestThatAsStringHasNoErrors(t *testing.T) {
 	assert, mockT := setupWithMockT(t)
 	assert.That("").AsString().IsEmpty()
