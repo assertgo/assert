@@ -1,12 +1,11 @@
 package assert
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
-type TestingT interface {
-	Fail()
-}
-
-func Setup(t TestingT) *Provider {
+func Setup(t *testing.T) *Provider {
 	return setupImpl(t, theLogger)
 }
 
@@ -46,12 +45,16 @@ func (p *Provider) ThatString(actual string) *String {
 	return &String{p.logFacade, actual}
 }
 
+type testingT interface {
+	Fail()
+}
+
 type logFacade struct {
-	t      TestingT
+	t      testingT
 	logger errorLogger
 }
 
-func setupImpl(t TestingT, logger errorLogger) *Provider {
+func setupImpl(t testingT, logger errorLogger) *Provider {
 	return &Provider{&logFacade{t, logger}}
 }
 
