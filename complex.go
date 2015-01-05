@@ -15,6 +15,11 @@ func (a *Complex) IsNonZero() *Complex {
 		"Expected nonzero, but was zero.")
 }
 
+func (a *Complex) IsEqualTo(expected complex128) *Complex {
+	return a.isTrue(a.actual == expected,
+		"Expected <%v>, but was <%v>.", expected, a.actual)
+}
+
 func (a *Complex) isTrue(condition bool, format string, args ...interface{}) *Complex {
 	logIfFalse(a.logFacade, condition, format, args...)
 	return a
