@@ -48,3 +48,19 @@ func TestThatComplexIsEqualToHasErrorMessages(t *testing.T) {
 		"Expected <(0+2i)>, but was <(0+1i)>.",
 	)
 }
+
+func TestThatComplexIsNotEqualToHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatComplex(1i).IsNotEqualTo(1).IsNotEqualTo(2i)
+	mockT.HasNoErrors()
+}
+
+func TestThatComplexIsNotEqualToHasErrorMessages(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatComplex(1i).IsNotEqualTo(complex(0, 1))
+	assert.ThatComplex(0.3 - 0.3i).IsNotEqualTo(complex(0.3, -0.3))
+	mockT.HasErrorMessages(
+		"Expected not equal to <(0+1i)>, but was.",
+		"Expected not equal to <(0.3-0.3i)>, but was.",
+	)
+}
