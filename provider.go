@@ -58,15 +58,11 @@ func setupImpl(t testingT, logger errorLogger) *Provider {
 	return &Provider{&logFacade{t, logger}}
 }
 
-func logIfFalse(logFacade *logFacade, condition bool, format string, args ...interface{}) {
-	if logFacade != nil && !condition {
+func logIfFalse(lf *logFacade, condition bool, format string, args ...interface{}) {
+	if lf != nil && !condition {
 		location := provideLocation(3)
 		message := fmt.Sprintf(format, args...)
-		logFacade.Log(location, message)
+		lf.logger.Log(location, message)
+		lf.t.Fail()
 	}
-}
-
-func (logFacade *logFacade) Log(location *location, message string) {
-	logFacade.t.Fail()
-	logFacade.logger.Log(location, message)
 }
