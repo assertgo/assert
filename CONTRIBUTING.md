@@ -13,4 +13,4 @@ We love pull requests. Here are some tips to make both your and our experinece s
 Warning
 -------
 
-We love pull requests, but if you do too many of them over time and we feel like your coding style matches ours, we may ask you to join the organization. It still your decision, but you have been warned.
+We love pull requests, but if you do too many of them over time and we feel like your coding style matches ours, we may ask you to join the organization. It's still your decision, but you have been warned.
