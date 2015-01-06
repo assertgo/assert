@@ -1,5 +1,5 @@
 #!/bin/bash
-# USAGE: release 1.1.1
+# USAGE: ./RELEASE.sh 1.1.1
 
 DIR=$(dirname $0)
 VERSION=$1
@@ -9,7 +9,7 @@ git checkout develop -b release/$VERSION
 
 sed -i -e "s/Version: .*/Version: $VERSION/" $DIR/README.md
 
-git commit -a -m "version $VERSION"
+git commit -a -m "Update version in README to $VERSION."
 git checkout master
 git merge --no-ff release/$VERSION
 git tag v$VERSION
