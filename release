@@ -16,5 +16,5 @@ git tag v$VERSION
 git checkout develop
 git merge --no-ff release/$VERSION
 git branch -d release/$VERSION
-#git push
-#git push --tags
+git push
+git push --tags
