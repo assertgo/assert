@@ -40,3 +40,8 @@ func TestPerfectNumber(t *testing.T) {
 ```
 
 Stating what you expect was never that easy.
+
+License
+-------
+
+assertgo is a free software and may be used under the terms specified in the [LICENSE](LICENSE) file.
