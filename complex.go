@@ -25,6 +25,14 @@ func (a *Complex) IsNotEqualTo(unexpected complex128) *Complex {
 		"Expected not equal to <%v>, but was.", unexpected)
 }
 
+func (a *Complex) Real() *Float {
+	return &Float{a.logFacade, real(a.actual)}
+}
+
+func (a *Complex) Imag() *Float {
+	return &Float{a.logFacade, imag(a.actual)}
+}
+
 func (a *Complex) isTrue(condition bool, format string, args ...interface{}) *Complex {
 	logIfFalse(a.logFacade, condition, format, args...)
 	return a

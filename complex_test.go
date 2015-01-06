@@ -64,3 +64,17 @@ func TestThatComplexIsNotEqualToHasErrorMessages(t *testing.T) {
 		"Expected not equal to <(0.3-0.3i)>, but was.",
 	)
 }
+
+func TestThatComplexRealHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatComplex(complex(0, -1)).Real().IsZero()
+	assert.ThatComplex(complex(3.3, 0)).Real().IsNonZero()
+	mockT.HasNoErrors()
+}
+
+func TestThatComplexImagHasNoErrors(t *testing.T) {
+	assert, mockT := setupWithMockT(t)
+	assert.ThatComplex(complex(3.3, 0)).Imag().IsZero()
+	assert.ThatComplex(complex(0, -1)).Imag().IsNonZero()
+	mockT.HasNoErrors()
+}
