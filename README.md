@@ -7,7 +7,7 @@ assertgo ![](https://raw.githubusercontent.com/assertgo/icon/master/assertgo_64.
 
 The coolest assertion library for go language!
 
-Version: 1.1.0
+Version: 2.0.0
 
 Getting started
 ---------------
@@ -24,7 +24,7 @@ And just start using it.
 
 ```go
 func TestPerfectNumber(t *testing.T) {
-	assert := assert.Setup(t)
+	assert := assert.New(t)
 	num := ComputePerfectNumber()
 	assert.ThatInt(num).
 		IsEqualTo(6).
@@ -40,3 +40,13 @@ func TestPerfectNumber(t *testing.T) {
 ```
 
 Stating what you expect was never that easy.
+
+Contibuting
+-----------
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+License
+-------
+
+assertgo is a free software and may be used under the terms specified in the [LICENSE](LICENSE) file.

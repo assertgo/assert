@@ -3,7 +3,7 @@ package assert
 import "testing"
 
 func TestLessThanTwoIsNotPrime(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	assert.ThatBool(isPrime(-1000)).IsFalse()
 	assert.ThatBool(isPrime(-100)).IsFalse()
 	assert.ThatBool(isPrime(-10)).IsFalse()
@@ -13,7 +13,7 @@ func TestLessThanTwoIsNotPrime(t *testing.T) {
 }
 
 func TestSmallNumbersArePrime(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	assert.ThatBool(isPrime(2)).IsTrue()
 	assert.ThatBool(isPrime(3)).IsTrue()
 	assert.ThatBool(isPrime(5)).IsTrue()
@@ -21,7 +21,7 @@ func TestSmallNumbersArePrime(t *testing.T) {
 }
 
 func TestSmallNumbersAreNotPrime(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	assert.ThatBool(isPrime(4)).IsFalse()
 	assert.ThatBool(isPrime(6)).IsFalse()
 	assert.ThatBool(isPrime(8)).IsFalse()
@@ -29,25 +29,25 @@ func TestSmallNumbersAreNotPrime(t *testing.T) {
 }
 
 func TestBigNumbersArePrime(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	assert.ThatBool(isPrime(2311)).IsTrue()
 	assert.ThatBool(isPrime(3203)).IsTrue()
 	assert.ThatBool(isPrime(1321)).IsTrue()
 }
 
 func TestBigNumbersAreNotPrime(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	assert.ThatBool(isPrime(1001)).IsFalse()
 	assert.ThatBool(isPrime(5251)).IsFalse()
 	assert.ThatBool(isPrime(2809)).IsFalse()
 }
 
 func TestReallyBigNumberIsPrime(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	assert.ThatBool(isPrime(2147483647)).IsTrue()
 }
 
 func TestReallyBigNumberIsNotPrime(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	assert.ThatBool(isPrime(46337 * 46337)).IsFalse()
 }
