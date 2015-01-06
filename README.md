@@ -41,6 +41,11 @@ func TestPerfectNumber(t *testing.T) {
 
 Stating what you expect was never that easy.
 
+Contibuting
+-----------
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 License
 -------
 
