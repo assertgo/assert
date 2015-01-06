@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Setup(t *testing.T) *Provider {
+func New(t *testing.T) *Provider {
 	return setupImpl(t, theLogger)
 }
 

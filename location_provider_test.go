@@ -7,7 +7,7 @@ func anotherFunction() *location {
 }
 
 func TestLocationProvider(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	thisLineLocation := provideLocation(0)
 	assert.That(thisLineLocation).IsEqualTo(
 		&location{"TestLocationProvider", "location_provider_test.go", 11},
@@ -15,7 +15,7 @@ func TestLocationProvider(t *testing.T) {
 }
 
 func TestLocationProviderCalledFromAnotherFunction(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	insideAnotherFunctionLocation := anotherFunction()
 	assert.That(insideAnotherFunctionLocation).IsEqualTo(
 		&location{"TestLocationProviderCalledFromAnotherFunction", "location_provider_test.go", 6},
@@ -23,7 +23,7 @@ func TestLocationProviderCalledFromAnotherFunction(t *testing.T) {
 }
 
 func TestLocationProviderPanicsWhenUsedIncorrectly(t *testing.T) {
-	assert := Setup(t)
+	assert := New(t)
 	defer func() {
 		r := recover()
 		assert.That(r).IsEqualTo("you shall not pass!")

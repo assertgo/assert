@@ -24,7 +24,7 @@ And just start using it.
 
 ```go
 func TestPerfectNumber(t *testing.T) {
-	assert := assert.Setup(t)
+	assert := assert.New(t)
 	num := ComputePerfectNumber()
 	assert.ThatInt(num).
 		IsEqualTo(6).

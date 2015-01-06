@@ -64,7 +64,7 @@ func TestErrorLoggerDifferentFileSameLine(t *testing.T) {
 }
 
 func setupWithLogger(t *testing.T) (provider *Provider, buffer *bytes.Buffer, logger errorLogger) {
-	provider = Setup(t)
+	provider = New(t)
 	buffer = &bytes.Buffer{}
 	logger = &errorLoggerImpl{writer: buffer}
 	return
