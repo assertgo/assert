@@ -1,7 +1,7 @@
 Contributing
 ============
 
-We love pull requests. Here are some tips to make both your and our experinece smoother.
+We love pull requests. Here are some tips to make both your and our experience smoother.
 
 * Make a fork of the repository.
 * Create a feature branch on top of develop branch and commit your changes.
