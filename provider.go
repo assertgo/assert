@@ -2,6 +2,7 @@ package assert
 
 import (
 	"fmt"
+	"net/http"
 	"testing"
 )
 
@@ -43,6 +44,10 @@ func (p *Provider) ThatComplex(actual complex128) *Complex {
 
 func (p *Provider) ThatString(actual string) *String {
 	return &String{p.logFacade, actual}
+}
+
+func (p *Provider) ThatHandlerFunc(actual http.HandlerFunc) *HandlerFunc {
+	return &HandlerFunc{p.logFacade, actual}
 }
 
 type testingT interface {
