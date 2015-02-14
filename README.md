@@ -1,6 +1,8 @@
 assertgo ![](https://raw.githubusercontent.com/assertgo/icon/master/assertgo_64.png)
 ====================================================================================
 
+[![Join the chat at https://gitter.im/assertgo/assert](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/assertgo/assert?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/assertgo/assert.svg?branch=develop)](https://travis-ci.org/assertgo/assert)
 [![Coverage Status](https://img.shields.io/coveralls/assertgo/assert.svg)](https://coveralls.io/r/assertgo/assert)
 [![GoDoc](https://godoc.org/github.com/assertgo/assert?status.svg)](https://godoc.org/github.com/assertgo/assert)
